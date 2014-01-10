@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-10T15:20:38+08:00</updated>
+  <updated>2014-01-10T16:21:37+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Test Markdown]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/10/test-markdown/"/>
+    <updated>2014-01-10T15:43:39+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/10/test-markdown</id>
+    <content type="html"><![CDATA[<h1>Markdown Test</h1>
+
+<blockquote><p>title &ndash; #</p></blockquote>
+
+<p><img src="http://traximus.github.io/images/tx.png" alt="markdown icon" /></p>
+
+<blockquote><p>image &ndash; (image path)</p></blockquote>
+
+<h2>Overview</h2>
+
+<blockquote><p>overview title &ndash; ##</p></blockquote>
+
+<p><strong>markdown</strong>, is so intresting.</p>
+
+<blockquote><p>bold &ndash; **in the front of content, and anthoer 2 in the end</p></blockquote>
+
+<h4>section1</h4>
+
+<blockquote><p>section &ndash; ####</p></blockquote>
+
+<h5>test table</h5>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ddd1     </th>
+<th>   ddd2   </th>
+<th> ddd3    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> content1</td>
+<td> content2 </td>
+<td>content3 |</td>
+</tr>
+<tr>
+<td></td>
+<td> cc      </td>
+<td>    dd    </td>
+<td> fff     |</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>section2</h4>
+
+<ol>
+<li>this is a test line</li>
+<li>this is a test line</li>
+<li>this is a test line</li>
+</ol>
+
+
+<h4>section3</h4>
+
+<ul>
+<li>this is line1</li>
+<li>this is line2</li>
+<li>this is line3</li>
+</ul>
+
+
+<h4>contact info</h4>
+
+<p><a href="https://traximus.github.io">https://traximus.github.io</a></p>
+
+<p><a href="https://github.com/traximus">@traximus</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello world]]></title>
