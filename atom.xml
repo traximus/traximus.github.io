@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-10T14:49:14+08:00</updated>
+  <updated>2014-01-10T15:12:42+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,5 +12,14 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hello world]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/10/hello-world/"/>
+    <updated>2014-01-10T15:09:18+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/10/hello-world</id>
+    <content type="html"><![CDATA[<p>not an easy way to achieve this. f</p>
+]]></content>
+  </entry>
   
 </feed>
