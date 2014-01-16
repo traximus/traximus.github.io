@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-16T15:33:15+08:00</updated>
+  <updated>2014-01-16T15:38:10+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -169,9 +169,9 @@ sodo vi username.conf
 <h4>OK,现在你可以尝试用一个WebDAV客户端，去连接你的WebDAV服务器，看看是不是能够正常查看和分享文件了？</h4>
 
 <ul>
-<li>服务器地址： <a href="http://%E4%BD%A0%E7%9A%84ip%E5%9C%B0%E5%9D%80/webdav/">http://%E4%BD%A0%E7%9A%84ip%E5%9C%B0%E5%9D%80/webdav/</a></li>
-<li>用户名   ： 你刚才设定的id （我们刚才设置的是myMacMini）</li>
-<li>密码    ：  你在创建过程中设置的密码</li>
+<li>服务器地址： <code>http://你的ip地址/webdav/</code></li>
+<li>用户名   ： <code>你刚才设定的id （我们刚才设置的是myMacMini）</code></li>
+<li>密码    ：  <code>你在创建过程中设置的密码</code></li>
 </ul>
 
 
