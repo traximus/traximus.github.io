@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-10T18:10:54+08:00</updated>
+  <updated>2014-01-16T15:33:15+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,174 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MAC下配置WebDAV服务器]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/15/macxia-pei-zhi-webdavfu-wu-qi/"/>
+    <updated>2014-01-15T12:16:56+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/15/macxia-pei-zhi-webdavfu-wu-qi</id>
+    <content type="html"><![CDATA[<hr />
+
+<p><strong>PS1：这是之前我做NAS项目时的WebDAV部分资料，既然弄了这个新的blog，就搬过来了。</strong></p>
+
+<p><strong>PS2:当时没有相关服务器，也找不到人来做，网上针对MAC系统搭建WebDAV服务器的资料也很少。源地址<a href="http://gigaom2.wordpress.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/">http://gigaom2.wordpress.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/</a> 原文针对iPad,我经过一定修改，在自己的lion上搭建成功。</strong></p>
+
+<p><strong>PS3:由于OS X 10.8以后好像没有“web共享“入口了，我自己是10.9没有该入口，所以先需要在终端中开启。</strong></p>
+
+<hr />
+
+<h1>什么是WebDAV?</h1>
+
+<p>参见：<a href="http://baike.baidu.com/view/974023.htm">http://baike.baidu.com/view/974023.htm</a></p>
+
+<blockquote><p>webDAV也就是“基于网络的分布式创作和版本控制协议”，他是HTTP协议的扩展. webDAV被用于对web服务器进行读写访问，而且每一台mac都自带了一个web server;</p>
+
+<p>当你在系统设置中，打开“web共享”时，就已经运行了一个Apache web server; 虽然webDAV内置于mac系统中，但是在OS X中却没有默认开启；你需要使用管理员权限来开启webDAV配置。</p></blockquote>
+
+<hr />
+
+<h1>10.7.5以后没有“web共享”入口的解决办法</h1>
+
+<h5>1.开启apache</h5>
+
+<p>打开safari，输入<code>http://localhost</code>测试，如果显示 it works! 说明apache已经开启；否则，在终端中输入： <strong>sudo apachectl restart</strong></p>
+
+<h5>2.这时用户根目录<code>http://localhost/~username</code>还不能访问，为了让<code>~/Sites</code>下面的内容可以访问，继续以下的几个步骤</h5>
+
+<ol>
+<li><p>查看username.conf文件是否存在</p>
+
+<p><code>
+ls /etc/apache2/users/
+</code></p></li>
+<li><p>若你的用户名.conf文件不存在，则需要手动建立一个</p>
+
+<p><code>
+cd /etc/apache2/users/
+</code></p>
+
+<p><code>
+sodo vi username.conf
+</code>
+<strong>注：username是你的mac用户名</strong></p></li>
+<li>粘贴以下内容到username.conf,注意把username替换为你自己的用户名</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   　 &lt;Directory "/Users/username/Sites/"&gt;
+</span><span class='line'>
+</span><span class='line'>　　　　Options Indexes MultiViews
+</span><span class='line'>
+</span><span class='line'>　　　　AllowOverride All
+</span><span class='line'>
+</span><span class='line'>　　　　Order allow,deny
+</span><span class='line'>
+</span><span class='line'>　　　　Allow from all　　
+</span><span class='line'>
+</span><span class='line'>　　　　&lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 保存，退出，重启apache: sudo apachectl restart</p>
+
+<p> <strong>接下来，现在就可以开始正式配置WebDAV服务器了</strong></p>
+
+<p>============</p>
+
+<h1>开始搭建WebDAV服务器</h1>
+
+<h4>1.关闭web server(或者之间关闭apache server)</h4>
+
+<p><img src="http://traximus.github.io/images/2014-01-16-01.jpeg" alt="turn off icon" /></p>
+
+<h4>2.修改Apache Web Server配置文件</h4>
+
+<p>打开launchpad,打开终端<strong>terminal</strong>
+注意，需要权限的时候，输入你的管理员密码，或者提前修改httpd.conf文件的读写权限；</p>
+
+<ul>
+<li>转到etc文件夹：<code>cd /etc/apache2</code></li>
+<li>编辑httpd.conf: <code>sudo vi httpd.conf</code></li>
+<li>寻找到这一行<code>“Include/private/etc/apache2/extra/httpd-dav.conf”</code> 取消注释，也就是去掉这一行前面的#</li>
+<li>wq保存，退出</li>
+</ul>
+
+
+<h4>3.想修改WebDAV模块的配置文件</h4>
+
+<p>到现在位置，WebDAV模块已经被打开了，这样下次apache Web Server启动的时候，就会自己寻找启动WebDAV模块的指令。</p>
+
+<ul>
+<li>打开终端，转到extra文件夹：<code>cd etc/apache2/extra</code></li>
+<li>编辑httpd-dav.conf文件： <code>sudo vi http-dav.conf</code></li>
+<li>使用下面的配置，取代已经存在的alias项和文件夹配置</li>
+</ul>
+
+
+<p><img src="http://traximus.github.io/images/2014-01-16-02.jpeg" alt="httpd-dav image" /></p>
+
+<h4>4.创建WebDAV用户</h4>
+
+<p>在第三步中，我们制定了一个密码文件<strong> /usr/webdav.passwd </strong> 他就是用于<strong>WebDAV</strong>模块验证用户的登陆验证；同时，我们制定了一个用户<strong>myMacMini</strong>；</p>
+
+<p>所以，我们需要创建一个用户 <strong>myMacMini</strong></p>
+
+<ul>
+<li>打开终端，转到extra文件夹：  <code>cd /etx/apache2/extra</code></li>
+<li>创建新的WebDAV用户名 <strong>myMacMini</strong> :  <code>sudo htpasswd -c /usr/webdav.passwd myMacMini</code></li>
+</ul>
+
+
+<h4>5.创建对应的WebDAV文件夹，并设定相应的权限</h4>
+
+<p>在第三步的配置中，我们也设定了WebDAV文件夹的位置 <strong>、Library/WebServer/WebDAV</strong>；</p>
+
+<p>所以，我们需要创建相应的文件夹路径：</p>
+
+<ul>
+<li>打开终端，转到extra文件夹： <code>cd /etc/apache2/extra</code></li>
+<li><p>创建WebDAV文件夹:</p>
+
+<p>  <code>
+  sudo mkdir -p /Library/WebServer/WebDAV
+  sudo mkdir -p /usr/var
+ </code></p></li>
+<li><p>设置适当的权限(也可以根据自己的需要，到相应的目录去设定权限)</p>
+
+<p>  <code>
+  sudo chown -R www:www /Library/WebServer/WebDAV
+  sudo chown -R www:www /usr/var
+  sudo chgrp www /usr/webdav.passwd
+ </code></p></li>
+</ul>
+
+
+<h4>设置完成，重启apache server: <code>sudo apachectl restart</code></h4>
+
+<h4>OK,现在你可以尝试用一个WebDAV客户端，去连接你的WebDAV服务器，看看是不是能够正常查看和分享文件了？</h4>
+
+<ul>
+<li>服务器地址： <a href="http://%E4%BD%A0%E7%9A%84ip%E5%9C%B0%E5%9D%80/webdav/">http://%E4%BD%A0%E7%9A%84ip%E5%9C%B0%E5%9D%80/webdav/</a></li>
+<li>用户名   ： 你刚才设定的id （我们刚才设置的是myMacMini）</li>
+<li>密码    ：  你在创建过程中设置的密码</li>
+</ul>
+
+
+<p>附：完整的路径位置</p>
+
+<p><img src="http://traximus.github.io/images/2014-01-16-03.jpeg" alt="completePath image" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Test Markdown]]></title>
