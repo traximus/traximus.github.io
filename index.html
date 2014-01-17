@@ -137,11 +137,11 @@
 
 <h1>10.7.5以后没有“web共享”入口的解决办法</h1>
 
-<h5>1.开启apache</h5>
+<h4>1.开启apache</h4>
 
 <p>打开safari，输入<code>http://localhost</code>测试，如果显示 it works! 说明apache已经开启；否则，在终端中输入： <strong>sudo apachectl restart</strong></p>
 
-<h5>2.这时用户根目录<code>http://localhost/~username</code>还不能访问，为了让<code>~/Sites</code>下面的内容可以访问，继续以下的几个步骤</h5>
+<h4>2.这时用户根目录<code>http://localhost/~username</code>还不能访问，为了让<code>~/Sites</code>下面的内容可以访问，继续以下的几个步骤</h4>
 
 <ol>
 <li><p>查看username.conf文件是否存在</p>
@@ -195,11 +195,11 @@ sodo vi username.conf
 
 <h1>开始搭建WebDAV服务器</h1>
 
-<h4>1.关闭web server(或者之间关闭apache server)</h4>
+<h3>1.关闭web server(或者直接关闭apache server)</h3>
 
 <p><img src="/images/2014-01-16-01.jpeg" alt="turn off icon" /></p>
 
-<h4>2.修改Apache Web Server配置文件</h4>
+<h3>2.修改Apache Web Server配置文件</h3>
 
 <p>打开launchpad,打开终端<strong>terminal</strong>
 注意，需要权限的时候，输入你的管理员密码，或者提前修改httpd.conf文件的读写权限；</p>
@@ -212,7 +212,7 @@ sodo vi username.conf
 </ul>
 
 
-<h4>3.想修改WebDAV模块的配置文件</h4>
+<h3>3.修改WebDAV模块的配置文件</h3>
 
 <p>到现在位置，WebDAV模块已经被打开了，这样下次apache Web Server启动的时候，就会自己寻找启动WebDAV模块的指令。</p>
 
@@ -225,7 +225,7 @@ sodo vi username.conf
 
 <p><img src="/images/2014-01-16-02.jpeg" alt="httpd-dav image" /></p>
 
-<h4>4.创建WebDAV用户</h4>
+<h3>4.创建WebDAV用户</h3>
 
 <p>在第三步中，我们制定了一个密码文件<strong> /usr/webdav.passwd </strong> 他就是用于<strong>WebDAV</strong>模块验证用户的登陆验证；同时，我们制定了一个用户<strong>myMacMini</strong>；</p>
 
@@ -237,7 +237,7 @@ sodo vi username.conf
 </ul>
 
 
-<h4>5.创建对应的WebDAV文件夹，并设定相应的权限</h4>
+<h3>5.创建对应的WebDAV文件夹，并设定相应的权限</h3>
 
 <p>在第三步的配置中，我们也设定了WebDAV文件夹的位置 <strong>、Library/WebServer/WebDAV</strong>；</p>
 
@@ -245,23 +245,32 @@ sodo vi username.conf
 
 <ul>
 <li>打开终端，转到extra文件夹： <code>cd /etc/apache2/extra</code></li>
-<li><p>创建WebDAV文件夹:</p>
-
-<p>  <code>
-  sudo mkdir -p /Library/WebServer/WebDAV
-  sudo mkdir -p /usr/var
- </code></p></li>
-<li><p>设置适当的权限(也可以根据自己的需要，到相应的目录去设定权限)</p>
-
-<p>  <code>
-  sudo chown -R www:www /Library/WebServer/WebDAV
-  sudo chown -R www:www /usr/var
-  sudo chgrp www /usr/webdav.passwd
- </code></p></li>
+<li>创建WebDAV文件夹:</li>
 </ul>
 
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mkdir -p /Library/WebServer/WebDAV
+</span><span class='line'>sudo mkdir -p /usr/var</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>设置适当的权限(也可以根据自己的需要，到相应的目录去设定权限)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chown -R www:www /Library/WebServer/WebDAV
+</span><span class='line'>sudo chown -R www:www /usr/var
+</span><span class='line'>sudo chgrp www /usr/webdav.passwd</span></code></pre></td></tr></table></div></figure>
+
+
 <h4>设置完成，重启apache server: <code>sudo apachectl restart</code></h4>
+
+<hr />
 
 <h4>OK,现在你可以尝试用一个WebDAV客户端，去连接你的WebDAV服务器，看看是不是能够正常查看和分享文件了？</h4>
 
