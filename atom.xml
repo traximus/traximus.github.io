@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-20T14:55:51+08:00</updated>
+  <updated>2014-01-20T15:32:33+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,182 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS中实现设备摇动检测]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/20/ioszhong-shi-xian-she-bei-yao-dong-jian-ce/"/>
+    <updated>2014-01-20T15:01:09+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/20/ioszhong-shi-xian-she-bei-yao-dong-jian-ce</id>
+    <content type="html"><![CDATA[<p>要检测iOS设备的摇动事件，网上有一些资料。我自己测试过的是下面这2种方式(其实算作一种，只是第二种方式可以在vc里面直接控制是否响应shake事件)</p>
+
+<ol>
+<li>UIWndow</li>
+<li>UIViewController(继承自UIResponder)</li>
+</ol>
+
+
+<hr />
+
+<h3>1.UIWindow</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-(void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  //开始
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  if (motion == UIEventSubtypeMotionShake)
+</span><span class='line'>  {
+</span><span class='line'>      //触发结束
+</span><span class='line'>      //
+</span><span class='line'>      //这里可以促发系统震动，或者发送一个通知，进行相应的处理
+</span><span class='line'>      //
+</span><span class='line'>      //例子： 添加系统震动
+</span><span class='line'>      //  AudioToolBox.framework
+</span><span class='line'>      //  #import&lt;AudioToolbox/AudioToolbox.h&gt;
+</span><span class='line'>      //  AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(void) motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  //取消
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.UIViewController</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#pragma mark - 
+</span><span class='line'>#pragma mark - viewController methods
+</span><span class='line'>
+</span><span class='line'>-(BOOL) canBecomeFirstResponder
+</span><span class='line'>{
+</span><span class='line'>  //这里设定一个变量，来控制是否支持shake事件
+</span><span class='line'>  return self.shakeDetectionOn;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(void) viewDidAppear:(BOOL)animated
+</span><span class='line'>{
+</span><span class='line'>  [super viewDidAppear:animated];
+</span><span class='line'>  
+</span><span class='line'>  if ([self canBecomeFirstResponder])
+</span><span class='line'>  {
+</span><span class='line'>      //下面这行代码，也可以写到viewDidLoad或者applicationDidFinishLaunch中
+</span><span class='line'>      [[UIApplication sharedApplication] setApplicationSupportShakeToEdit:YES];
+</span><span class='line'>      
+</span><span class='line'>      [self becomFirstResponder];
+</span><span class='line'>  }
+</span><span class='line'>  else
+</span><span class='line'>  {
+</span><span class='line'>      NSLog(@"NOT supported");
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>#pragma mark -
+</span><span class='line'>#pragma mark - UIResponder support motion
+</span><span class='line'>
+</span><span class='line'>-(void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  NSLog(@"======== shake begins ==========");
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(void) motionCancelled:(UIEventSybtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  NSLog(@"======== shake cancelled ==========");
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>-(void) motionEnd：（UIEventSubtype)motion withEvent:(UIEvent *)event
+</span><span class='line'>{
+</span><span class='line'>  if (motion == UIEventSubtypeMotionShake)
+</span><span class='line'>  {
+</span><span class='line'>      NSLog(@"======== shake ended ========");
+</span><span class='line'>      //这里可以添加震动反馈，或者发送notification
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>======</p>
+
+<h4>说实话，在实际应用中，很少有合适的场景会用到这个事件；</h4>
+
+<p>而且上面的方式检测shake事件，我自己测试的时候，发现响应有一点延迟，肯定可以再改进；
+找机会再慢慢研究一下。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HTTP交互用到的MIME-Type对照]]></title>
