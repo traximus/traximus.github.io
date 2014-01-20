@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-17T17:23:54+08:00</updated>
+  <updated>2014-01-20T14:55:51+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP交互用到的MIME-Type对照]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao/"/>
+    <updated>2014-01-20T14:28:06+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao</id>
+    <content type="html"><![CDATA[<p>这是我自己的app中，需要解析xml文档，然后针对不同类型的文件，进行相应的操作。所以必须知道文件对应的mime-type（http返回的xml文档中有相应的描述）；</p>
+
+<hr />
+
+<p><strong>下面是我自己根据wiki和测试后得到的数据，作为备忘：</strong></p>
+
+<p><strong>音频 &ndash; Audio</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.mp3     audio/mpeg
+</span><span class='line'>.aac      audio/x-aac
+</span><span class='line'>.m4a      audio/mp4a-latm
+</span><span class='line'>.aiff     audio/x-aiff
+</span><span class='line'>.wav      audio/x-wav</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>视频 &ndash; Video</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.mov     video/quicktime
+</span><span class='line'>.mp4      video/mp4
+</span><span class='line'>.3gp      video/3gpp
+</span><span class='line'>.m4v      video/x-m4v</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>图片 &ndash; Image</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.tiff        image/tiff
+</span><span class='line'>.tif      image/tiff
+</span><span class='line'>.jpg      image/jpeg
+</span><span class='line'>.jpeg     image/jpeg
+</span><span class='line'>.gif      image/gif
+</span><span class='line'>.png      image/png
+</span><span class='line'>.bmp      image/bmp
+</span><span class='line'>.bmpf     image/bmp
+</span><span class='line'>.ico      image/x-icon
+</span><span class='line'>/xbm      image/x-bitmap</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>其他 &ndash; Other</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.pdf     application/pdf
+</span><span class='line'>.txt      text/plain
+</span><span class='line'>.zip      application/zip
+</span><span class='line'>.tar      application/tar
+</span><span class='line'>.rar      application/rar</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MAC下配置WebDAV服务器]]></title>
