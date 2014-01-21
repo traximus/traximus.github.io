@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-21T14:26:31+08:00</updated>
+  <updated>2014-01-21T14:31:58+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -51,7 +51,7 @@
 
 <p>类似与NSDateFormatter, NSCalendar，这些object的初始化，设置效率比较低，代价比较大。针对这种情况，应该考虑重用。</p>
 
-<p>应对的做法有2种：</p>
+<p><strong>应对的做法有2种：</strong></p>
 
 <ul>
 <li>添加为class的变量，进行reuse</li>
@@ -137,7 +137,7 @@
 </ul>
 
 
-<h4>3)choose corrent data storage option</h4>
+<h4>3)choose <code>corrent data storage option</code></h4>
 
 <ul>
 <li>NSUserDefaults    &ndash;   small data</li>
@@ -162,10 +162,14 @@
 
 <h2>10. Drawing performance</h2>
 
-<p>考虑不同的绘图机制的性能
-* UIKit
-* Core Animation
-* Core Graphics(相对于其他而言，更加高效)</p>
+<p>考虑不同的绘图机制的性能</p>
+
+<ul>
+<li>UIKit</li>
+<li>Core Animation</li>
+<li>Core Graphics(相对于其他而言，更加高效)</li>
+</ul>
+
 
 <p>//绘制 Shadow Path</p>
 
@@ -261,6 +265,10 @@
 
 
 <p>注意：对于会多次使用到的image，选择imageNamed：更加合适，因为system cache会进行cache; 而对于单词使用的image，直接从文件加载的imageWithContentsOfFile:更加合适</p>
+
+<hr />
+
+<p>上面的知识点只是针对我个人做备忘，每一个人对此的理解不一样，因此建议看看原文。</p>
 ]]></content>
   </entry>
   
