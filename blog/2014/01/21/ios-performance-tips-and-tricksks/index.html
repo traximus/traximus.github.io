@@ -1,0 +1,415 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>iOS performance Tips&amp;Tricksks - Traximus‘pages</title>
+	<meta name="author" content="traximus">
+
+	
+	<meta name="description" content="iOS Performance Tips&amp;Tricksks 原文：http://www.raywenderlich.com/31166/25-ios-app-performance-tips-tricks app拥有良好的性能非常重要，这是保证良好用户体验的基石。这篇文章是基于原文， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Traximus‘pages" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://traximus.github.io/blog/2014/01/21/ios-performance-tips-and-tricksks/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='/images/tx.png' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Traximus‘pages</a></h1>
+<p class="subtitle">my little world, Rorschach does existed.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">iOS Performance Tips&amp;Tricksks</h1>
+	<div class="entry-content" itemprop="articleBody"><blockquote><p>原文：<a href="http://www.raywenderlich.com/31166/25-ios-app-performance-tips-tricks">http://www.raywenderlich.com/31166/25-ios-app-performance-tips-tricks</a></p></blockquote>
+
+<p>app拥有良好的性能非常重要，这是保证良好用户体验的基石。这篇文章是基于原文，我自己的备忘记录。</p>
+
+<hr />
+
+<h2>1.ARC</h2>
+
+<p>新项目现在一般都是基于ARC了，就算使用ARC，很多情况下，还是会有内存泄露的情况存在，所以使用instrument就很必要了。</p>
+
+<p><strong>如何使用instrument：<a href="http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode">http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode</a></strong></p>
+
+<hr />
+
+<h2>2.Reuse</h2>
+
+<h4>1)reuseidentifier</h4>
+
+<ul>
+<li>UITableViewCell</li>
+<li>UICollectionViewCell</li>
+<li>UITableViewHeaderFooterViews</li>
+</ul>
+
+
+<h4>2)Resue &amp;&amp; Lazy load</h4>
+
+<p>学习UITableView的方式，不要一次性创建所有的subView,你只在需要的时候创建subView,并把它添加到reuse Queue;这可以避免大量的消耗。想啊次使用的时候，你只需要reuse即可。</p>
+
+<h4>3)reuse Expensive object</h4>
+
+<p>类似与NSDateFormatter, NSCalendar，这些object的初始化，设置效率比较低，代价比较大。针对这种情况，应该考虑重用。</p>
+
+<p>应对的做法有2种：</p>
+
+<ul>
+<li>添加为class的变量，进行reuse</li>
+<li>创建一个static variable</li>
+</ul>
+
+
+<p>对于第二种情况，你应该写一个类似与singleton的方法，来获取这个object</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-(NSDateFormatter *)fotmatter
+</span><span class='line'>{
+</span><span class='line'>  static NSDateFormatter *formatter;
+</span><span class='line'>  static dispatch_once_t onceToken;
+</span><span class='line'>  dispatch_once(&onceToken, ^{
+</span><span class='line'>      _formatter = [[NSDateFormatter alloc] init];
+</span><span class='line'>      _formatter.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";//twitter date format
+</span><span class='line'>  });
+</span><span class='line'>  
+</span><span class='line'>  return formatter;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>3.set <code>opaque</code> to YES</h2>
+
+<p>default</p>
+
+<hr />
+
+<h2>4.Avoid fat XIBs</h2>
+
+<p>因为在XIB初始化的时候，会直接加载所有内容到内存中，增加大量的开销。因此，尽量把XIB拆分开，只在需要的时候在初始化并进行加载，这样就可以避免一次性加载国语复杂的xib所导致的内存和cpu过量消耗；</p>
+
+<p>当然，现在很多项目使用stroyboard在一定程度上已经缓解了这个问题。</p>
+
+<hr />
+
+<h2>5.DO NOT block Main Thread</h2>
+
+<ul>
+<li>GCD</li>
+<li>[NSURLConnection sendAsynchronousRequest: completionHandler:]</li>
+</ul>
+
+
+<hr />
+
+<h2>6.<code>Size image</code> to imageVew&rsquo;s size</h2>
+
+<p>事实上，将一个image放入到imageview中，并进行sizeToFit是有很大开销的,而且这部分开销可以避免；
+当我们获取到image后，最好先进行resize,然后再放入到合适的imageView中；</p>
+
+<hr />
+
+<h2>7. Choose right data format and structure</h2>
+
+<h4>1)choose <code>correct collection</code></h4>
+
+<ul>
+<li>NSArray：<strong>ordered</strong> list of values, <strong>Quick lookup</strong> by <strong>index</strong>, <strong>Slow lookup</strong> by <strong>value</strong>；<strong>Slow</strong> to insert&amp;delete</li>
+<li>NSDictionary：key-value pairs, <strong>Quick lookup</strong> by <strong>key</strong></li>
+<li>NSSet：unordered list of values, <strong>Quick lookup</strong>by <strong>value</strong>, <strong>Quick</strong> insert&amp;delete</li>
+</ul>
+
+
+<h4>2)choose <code>right data format</code></h4>
+
+<ul>
+<li>JSON &ndash; faster to parse, smaller than XML</li>
+<li>XML &ndash; soap advantage</li>
+</ul>
+
+
+<h4>3)choose corrent data storage option</h4>
+
+<ul>
+<li>NSUserDefaults    &ndash;   small data</li>
+<li>XML,JSON,Plist    &ndash;   expensive operation to store and parse</li>
+<li>NSCoding (archive)&ndash;   expensive as above</li>
+<li>sqlite            &ndash;   easy to use</li>
+<li>Core Data         &ndash;   like above</li>
+</ul>
+
+
+<hr />
+
+<h2>8.enable GZIP compression</h2>
+
+<hr />
+
+<h2>9.cache</h2>
+
+<p>对于不会变化，并且经常使用到的object进行cache; 对于http cache, 基本的第三方库都已经实现了cache; 对于一般的object，可以使用NSCache:<a href="http://nshipster.com/nscache/">http://nshipster.com/nscache/</a></p>
+
+<hr />
+
+<h2>10. Drawing performance</h2>
+
+<p>考虑不同的绘图机制的性能
+* UIKit
+* Core Animation
+* Core Graphics(相对于其他而言，更加高效)</p>
+
+<p>//绘制 Shadow Path</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//CoreAnimation - 这种方式代价高昂
+</span><span class='line'>UIView *view= [[UIView alloc] init];
+</span><span class='line'>view.layer.shadowOffst = CGSizeMake(-1.0, 1.0);
+</span><span class='line'>view.layer.shadowRadius = 5.0;
+</span><span class='line'>view.layer.shadowOpacity = 0.6;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//effective way
+</span><span class='line'>view.layer.shadowPath = [[UIBezierPath bezierPathWithRect: view.bounds] CGPath];</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>11.处理Memory Warnings</h2>
+
+<p>常见有3中方式接收到memory warning</p>
+
+<ol>
+<li>applicationDidReceiveMemoryWarning: appDelegate</li>
+<li>didReceiveMemoryWarning：           UIViewController</li>
+<li>UIApplicationDidReceiveMemoryWarningNotification：notificationCenter</li>
+</ol>
+
+
+<hr />
+
+<h2>12.Avoid Re-Processing Data</h2>
+
+<p>这主要是数据出库的逻辑需要规划好</p>
+
+<hr />
+
+<h2>13. background image</h2>
+
+<ul>
+<li>full size image &ndash; [UIImage imageNamed:@&ldquo;test.png&rdquo;];</li>
+<li>pattern image &ndash; [UIColor colorWithPatternImage:[UIImage imageNamed:@&ldquo;test.png&rdquo;]];</li>
+</ul>
+
+
+<hr />
+
+<h2>14.reduce your web footprint</h2>
+
+<p>尽量减少javascript的使用</p>
+
+<hr />
+
+<h2>15.Optimize tableview</h2>
+
+<ul>
+<li>reuse cell</li>
+<li>set subview opaque</li>
+<li>avoid gradients, image scale, offscreen drawing</li>
+<li>cache height if height is variable</li>
+<li>use asynchronously method for cell&#8217; contents</li>
+<li>use shadowPath to set shadow</li>
+<li>reduce te number of subViews</li>
+<li>do as little work possible in <code>cellForRowAtIndexPath:</code></li>
+<li>use the appropriate data structure</li>
+<li>use <code>rowHeight</code>, <code>sectionFooterHeight</code>,<code>sectionHeaderHeight</code> to set constant height instead of delegte(效率上能理解，设计上我自己暂时不是很理解这条)</li>
+</ul>
+
+
+<hr />
+
+<h2>16.speed up Launch time</h2>
+
+<p>注1：异步获取数据，延迟加载，避免臃肿的xib</p>
+
+<p>注2：测试Launch time最有效的方式是，断开Xcode,单独运行你的app</p>
+
+<hr />
+
+<h2>17.image load</h2>
+
+<ul>
+<li>imageNamed:               &ndash;   首先从system cache里面查找该image，如果没有找到，再从文件加载image</li>
+<li>imageWithContentsOfFile:  &ndash;   直接从文件加载image,不检查system cache</li>
+</ul>
+
+
+<p>注意：对于会多次使用到的image，选择imageNamed：更加合适，因为system cache会进行cache; 而对于单词使用的image，直接从文件加载的imageWithContentsOfFile:更加合适</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	<a class="addthis_button_sinaweibo"></a>
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - traximus -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'traximus';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://traximus.github.io/blog/2014/01/21/ios-performance-tips-and-tricksks/';
+        var disqus_url = 'http://traximus.github.io/blog/2014/01/21/ios-performance-tips-and-tricksks/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47247343-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
