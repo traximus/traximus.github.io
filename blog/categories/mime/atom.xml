@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MIME | Traximus‘pages]]></title>
+  <link href="http://traximus.github.io/blog/categories/mime/atom.xml" rel="self"/>
+  <link href="http://traximus.github.io/"/>
+  <updated>2014-01-22T19:45:34+08:00</updated>
+  <id>http://traximus.github.io/</id>
+  <author>
+    <name><![CDATA[traximus]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP交互用到的MIME-Type对照]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao/"/>
+    <updated>2014-01-20T14:28:06+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao</id>
+    <content type="html"><![CDATA[<p>这是我自己的app中，需要解析xml文档，然后针对不同类型的文件，进行相应的操作。所以必须知道文件对应的mime-type（http返回的xml文档中有相应的描述）；<!--more--></p>
+
+<hr />
+
+<p><strong>下面是我自己根据wiki和测试后得到的数据，作为备忘：</strong></p>
+
+<p><strong>音频 &ndash; Audio</strong></p>
+
+<p><code>
+.mp3        audio/mpeg
+.aac        audio/x-aac
+.m4a        audio/mp4a-latm
+.aiff       audio/x-aiff
+.wav        audio/x-wav
+</code></p>
+
+<p><strong>视频 &ndash; Video</strong></p>
+
+<p><code>
+.mov        video/quicktime
+.mp4        video/mp4
+.3gp        video/3gpp
+.m4v        video/x-m4v
+</code></p>
+
+<p><strong>图片 &ndash; Image</strong></p>
+
+<p><code>
+.tiff       image/tiff
+.tif        image/tiff
+.jpg        image/jpeg
+.jpeg       image/jpeg
+.gif        image/gif
+.png        image/png
+.bmp        image/bmp
+.bmpf       image/bmp
+.ico        image/x-icon
+/xbm        image/x-bitmap
+</code></p>
+
+<p><strong>其他 &ndash; Other</strong></p>
+
+<p><code>
+.pdf        application/pdf
+.txt        text/plain
+.zip        application/zip
+.tar        application/tar
+.rar        application/rar
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
