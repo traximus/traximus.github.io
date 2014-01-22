@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-22T12:38:46+08:00</updated>
+  <updated>2014-01-22T12:46:44+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -264,7 +264,7 @@
 </ul>
 
 
-<p>注意：对于会多次使用到的image，选择imageNamed：更加合适，因为system cache会进行cache; 而对于单词使用的image，直接从文件加载的imageWithContentsOfFile:更加合适</p>
+<p>注意：对于会多次使用到的image，选择imageNamed：更加合适，因为system cache会进行cache; 而对于单次使用的image，直接从文件加载的imageWithContentsOfFile:更加合适</p>
 
 <hr />
 
