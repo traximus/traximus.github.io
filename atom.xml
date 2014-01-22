@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-22T19:45:34+08:00</updated>
+  <updated>2014-01-22T20:34:06+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习CoreGraphics]]></title>
+    <link href="http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics/"/>
+    <updated>2014-01-22T20:03:43+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics</id>
+    <content type="html"><![CDATA[<blockquote><h4>前段时间看了一些CoreGraphics资料，对CoreGraphics有了一定程度的认识，了解了基本用法，能实现一些简单的绘制功能。同时还在源地址发现了另一个东西PaintCode,能帮助实现自定义控件，同时我个人感觉PaintCode生成的代码，可读性还不错，也可以作为学习CoreGraphics的一种方式。<!--more--></h4></blockquote>
+
+<hr />
+
+<h2>CoreGraphics</h2>
+
+<h4>1. <a href="http://www.raywenderlich.com/32283/core-graphics-tutorial-lines-rectangles-and-gradients">Lines,Rectangles, and Gradients</a></h4>
+
+<h4>2. <a href="http://www.raywenderlich.com/32925/core-graphics-tutorial-shadows-and-gloss">Shadows and Gloss</a></h4>
+
+<h4>3. <a href="http://www.raywenderlich.com/33193/core-graphics-tutorial-arcs-and-paths">Arcs and Paths</a></h4>
+
+<h4>4. <a href="http://www.raywenderlich.com/33330/core-graphics-tutorial-glossy-buttons">Glossy Buttons</a></h4>
+
+<h4>5. <a href="http://www.raywenderlich.com/33496/core-graphics-tutorial-patterns">Patterns</a></h4>
+
+<h4>6. <a href="http://www.raywenderlich.com/34003/core-graphics-tutorial-curves-and-layers">Curves and Layers</a></h4>
+
+<h4>7. How to Create a PDF with Quartz2D in iOS 5</h4>
+
+<ul>
+<li><a href="http://www.raywenderlich.com/6581/how-to-create-a-pdf-with-quartz-2d-in-ios-5-tutorial-part-1">part1</a></li>
+<li><a href="http://www.raywenderlich.com/6818/how-to-create-a-pdf-with-quartz-2d-in-ios-5-tutorial-part-2">part2</a></li>
+</ul>
+
+
+<h4>8. <a href="http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit">How to Make a Simple Drawing App with UIKit</a></h4>
+
+<hr />
+
+<h2>PaintCod径</h2>
+
+<h4>1. <a href="http://www.raywenderlich.com/36341/paintcode-tutorial-dynamic-buttons">绘制动态按钮</a></h4>
+
+<h4>2. <a href="http://www.raywenderlich.com/35720/paintcode-tutorial-custom-progress-bar">绘制自定义的ProgressBar</a></h4>
+
+<h4>3. <a href="http://www.raywenderlich.com/38918/paintcode-tutorial-bezier-paths">绘制贝塞尔曲线</a></h4>
+
+<hr />
+
+<p><strong>PS1: 这是CoreGraphics一些列相关资料，循序渐进的学习，效果会比较不错;其中小部分文章有中文，其余是英文，如果有时间，我可以用我蹩脚的英语翻译一下。</strong></p>
+
+<p><strong>PS2: 我记得其中PaintCode一篇生成的code是有问题的，可能是PaintCode的版本不一样导致的？我在实践的时候，发现好像是一个rect不对（时间有点久，从老blog搬过来的，实在记不起了>_&lt;），实践的时候可能稍微注意一下。</strong></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS performance Tips&amp;Tricksks]]></title>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>学习CoreGraphics - Traximus‘pages</title>
+	<meta name="author" content="traximus">
+
+	
+	<meta name="description" content="学习CoreGraphics 前段时间看了一些CoreGraphics资料，对CoreGraphics有了一定程度的认识，了解了基本用法，能实现一些简单的绘制功能。同时还在源地址发现了另一个东西PaintCode,能帮助实现自定义控件，同时我个人感觉PaintCode生成的代码，可读性还不错， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Traximus‘pages" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='/images/tx.png' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Traximus‘pages</a></h1>
+<p class="subtitle">my little world, Rorschach does existed.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">学习CoreGraphics</h1>
+	<div class="entry-content" itemprop="articleBody"><blockquote><h4>前段时间看了一些CoreGraphics资料，对CoreGraphics有了一定程度的认识，了解了基本用法，能实现一些简单的绘制功能。同时还在源地址发现了另一个东西PaintCode,能帮助实现自定义控件，同时我个人感觉PaintCode生成的代码，可读性还不错，也可以作为学习CoreGraphics的一种方式。<!--more--></h4></blockquote>
+
+<hr />
+
+<h2>CoreGraphics</h2>
+
+<h4>1. <a href="http://www.raywenderlich.com/32283/core-graphics-tutorial-lines-rectangles-and-gradients">Lines,Rectangles, and Gradients</a></h4>
+
+<h4>2. <a href="http://www.raywenderlich.com/32925/core-graphics-tutorial-shadows-and-gloss">Shadows and Gloss</a></h4>
+
+<h4>3. <a href="http://www.raywenderlich.com/33193/core-graphics-tutorial-arcs-and-paths">Arcs and Paths</a></h4>
+
+<h4>4. <a href="http://www.raywenderlich.com/33330/core-graphics-tutorial-glossy-buttons">Glossy Buttons</a></h4>
+
+<h4>5. <a href="http://www.raywenderlich.com/33496/core-graphics-tutorial-patterns">Patterns</a></h4>
+
+<h4>6. <a href="http://www.raywenderlich.com/34003/core-graphics-tutorial-curves-and-layers">Curves and Layers</a></h4>
+
+<h4>7. How to Create a PDF with Quartz2D in iOS 5</h4>
+
+<ul>
+<li><a href="http://www.raywenderlich.com/6581/how-to-create-a-pdf-with-quartz-2d-in-ios-5-tutorial-part-1">part1</a></li>
+<li><a href="http://www.raywenderlich.com/6818/how-to-create-a-pdf-with-quartz-2d-in-ios-5-tutorial-part-2">part2</a></li>
+</ul>
+
+
+<h4>8. <a href="http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit">How to Make a Simple Drawing App with UIKit</a></h4>
+
+<hr />
+
+<h2>PaintCod径</h2>
+
+<h4>1. <a href="http://www.raywenderlich.com/36341/paintcode-tutorial-dynamic-buttons">绘制动态按钮</a></h4>
+
+<h4>2. <a href="http://www.raywenderlich.com/35720/paintcode-tutorial-custom-progress-bar">绘制自定义的ProgressBar</a></h4>
+
+<h4>3. <a href="http://www.raywenderlich.com/38918/paintcode-tutorial-bezier-paths">绘制贝塞尔曲线</a></h4>
+
+<hr />
+
+<p><strong>PS1: 这是CoreGraphics一些列相关资料，循序渐进的学习，效果会比较不错;其中小部分文章有中文，其余是英文，如果有时间，我可以用我蹩脚的英语翻译一下。</strong></p>
+
+<p><strong>PS2: 我记得其中PaintCode一篇生成的code是有问题的，可能是PaintCode的版本不一样导致的？我在实践的时候，发现好像是一个rect不对（时间有点久，从老blog搬过来的，实在记不起了>_&lt;），实践的时候可能稍微注意一下。</strong></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	<a class="addthis_button_sinaweibo"></a>
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - traximus -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'traximus';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics/';
+        var disqus_url = 'http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47247343-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
