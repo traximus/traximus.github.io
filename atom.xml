@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-01-21T14:31:58+08:00</updated>
+  <updated>2014-01-22T12:38:46+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -20,7 +20,7 @@
     <id>http://traximus.github.io/blog/2014/01/21/ios-performance-tips-and-tricksks</id>
     <content type="html"><![CDATA[<blockquote><p>原文：<a href="http://www.raywenderlich.com/31166/25-ios-app-performance-tips-tricks">http://www.raywenderlich.com/31166/25-ios-app-performance-tips-tricks</a></p></blockquote>
 
-<p>app拥有良好的性能非常重要，这是保证良好用户体验的基石。这篇文章是基于原文，我自己的备忘记录。</p>
+<p>app拥有良好的性能非常重要，这是保证良好用户体验的基石。这篇文章是基于原文，我自己的备忘记录。<!--more--></p>
 
 <hr />
 
@@ -277,7 +277,7 @@
     <link href="http://traximus.github.io/blog/2014/01/20/ioszhong-shi-xian-she-bei-yao-dong-jian-ce/"/>
     <updated>2014-01-20T15:01:09+08:00</updated>
     <id>http://traximus.github.io/blog/2014/01/20/ioszhong-shi-xian-she-bei-yao-dong-jian-ce</id>
-    <content type="html"><![CDATA[<p>要检测iOS设备的摇动事件，网上有一些资料。我自己测试过的是下面这2种方式(其实算作一种，只是第二种方式可以在vc里面直接控制是否响应shake事件)</p>
+    <content type="html"><![CDATA[<p>要检测iOS设备的摇动事件，网上有一些资料。我自己测试过的是下面这2种方式(其实算作一种，只是第二种方式可以在vc里面直接控制是否响应shake事件)<!--more--></p>
 
 <ol>
 <li>UIWndow</li>
@@ -453,7 +453,7 @@
     <link href="http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao/"/>
     <updated>2014-01-20T14:28:06+08:00</updated>
     <id>http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao</id>
-    <content type="html"><![CDATA[<p>这是我自己的app中，需要解析xml文档，然后针对不同类型的文件，进行相应的操作。所以必须知道文件对应的mime-type（http返回的xml文档中有相应的描述）；</p>
+    <content type="html"><![CDATA[<p>这是我自己的app中，需要解析xml文档，然后针对不同类型的文件，进行相应的操作。所以必须知道文件对应的mime-type（http返回的xml文档中有相应的描述）；<!--more--></p>
 
 <hr />
 
@@ -532,7 +532,7 @@
     <id>http://traximus.github.io/blog/2014/01/15/macxia-pei-zhi-webdavfu-wu-qi</id>
     <content type="html"><![CDATA[<hr />
 
-<p><strong>PS1：这是之前我做NAS项目时的WebDAV部分资料，既然弄了这个新的blog，就搬过来了。</strong></p>
+<p><strong>PS1：这是之前我做NAS项目时的WebDAV部分资料，既然弄了这个新的blog，就搬过来了。</strong><!--more--></p>
 
 <p><strong>PS2: 当时没有相关服务器，也找不到人来做，网上针对MAC系统搭建WebDAV服务器的资料也很少。源地址<a href="http://gigaom2.wordpress.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/">http://gigaom2.wordpress.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/</a> 原文针对iPad,我经过一定修改，在自己的lion上搭建成功。</strong></p>
 
@@ -711,7 +711,7 @@ sodo vi username.conf
 
 <blockquote><p>title &ndash; #</p></blockquote>
 
-<p><img src="http://traximus.github.io/images/tx.png" alt="markdown icon" /></p>
+<p><img src="http://traximus.github.io/images/tx.png" alt="markdown icon" /><!--more--></p>
 
 <blockquote><p>image &ndash; (image path)</p></blockquote>
 
