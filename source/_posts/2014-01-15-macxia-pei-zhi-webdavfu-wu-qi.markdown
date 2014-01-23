@@ -3,10 +3,10 @@ layout: post
 title: "MAC下配置WebDAV服务器"
 date: 2014-01-15 12:16:56 +0800
 comments: true
-categories: 
+categories: Mac,WebDAV,Server
 ---
 ---------------
-**PS1：这是之前我做NAS项目时的WebDAV部分资料，既然弄了这个新的blog，就搬过来了。**
+**PS1：这是之前我做NAS项目时的WebDAV部分资料，既然弄了这个新的blog，就搬过来了。**<!--more-->
 
 **PS2: 当时没有相关服务器，也找不到人来做，网上针对MAC系统搭建WebDAV服务器的资料也很少。源地址<http://gigaom2.wordpress.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/> 原文针对iPad,我经过一定修改，在自己的lion上搭建成功。**
 

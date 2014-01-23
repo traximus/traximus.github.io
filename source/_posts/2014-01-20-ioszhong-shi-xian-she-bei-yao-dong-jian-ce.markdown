@@ -3,9 +3,9 @@ layout: post
 title: "iOS中实现设备摇动检测"
 date: 2014-01-20 15:01:09 +0800
 comments: true
-categories: 
+categories: iOS_App
 ---
-要检测iOS设备的摇动事件，网上有一些资料。我自己测试过的是下面这2种方式(其实算作一种，只是第二种方式可以在vc里面直接控制是否响应shake事件)
+要检测iOS设备的摇动事件，网上有一些资料。我自己测试过的是下面这2种方式(其实算作一种，只是第二种方式可以在vc里面直接控制是否响应shake事件)<!--more-->
 
 1. UIWndow
 2. UIViewController(继承自UIResponder)

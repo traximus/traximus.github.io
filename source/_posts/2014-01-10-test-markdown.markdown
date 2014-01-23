@@ -3,13 +3,13 @@ layout: post
 title: "Test Markdown"
 date: 2014-01-10 15:43:39 +0800
 comments: true
-categories: 
+categories: other
 ---
 
 # Markdown Test
 >title - #
 
-![markdown icon](/images/tx.png)
+![markdown icon](/images/tx.png)<!--more-->
 
 >image - (image path) 
 
@@ -21,6 +21,7 @@ categories:
 
 #### section1
 >section - ####
+
 
 #####test table
 |ddd1     |   ddd2   | ddd3    |
