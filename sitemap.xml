@@ -2,62 +2,66 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://traximus.github.io/blog/2014/01/10/hello-world/</loc>
-        <lastmod>2014-01-22T19:40:05+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/2014/01/10/test-markdown/</loc>
-        <lastmod>2014-01-22T19:40:14+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/2014/01/15/macxia-pei-zhi-webdavfu-wu-qi/</loc>
-        <lastmod>2014-01-22T19:41:40+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://traximus.github.io/blog/2014/01/20/httpjiao-hu-yong-dao-de-mime-typedui-zhao/
         </loc>
-        <lastmod>2014-01-22T19:45:23+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://traximus.github.io/blog/2014/01/20/ioszhong-shi-xian-she-bei-yao-dong-jian-ce/
         </loc>
-        <lastmod>2014-01-22T19:44:13+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/2014/01/21/ios-performance-tips-and-tricksks/</loc>
-        <lastmod>2014-01-22T19:42:41+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/2014/01/22/xue-xi-coregraphics/</loc>
-        <lastmod>2014-01-22T20:33:57+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://traximus.github.io/blog/2014/02/11/ru-he-shi-yong-instruments/</loc>
+        <lastmod>2014-02-11T18:20:22+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/about/</loc>
-        <lastmod>2014-01-21T14:11:47+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/archives/</loc>
-        <lastmod>2014-01-22T20:33:57+08:00</lastmod>
+        <lastmod>2014-02-11T18:20:22+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/categories/iOS_app/</loc>
-        <lastmod>2014-01-21T15:25:18+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/categories/iOS_game/</loc>
-        <lastmod>2014-01-21T15:25:10+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/blog/categories/other/</loc>
-        <lastmod>2014-01-21T15:24:59+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/</loc>
-        <lastmod>2014-01-22T20:33:57+08:00</lastmod>
+        <lastmod>2014-02-11T18:20:22+08:00</lastmod>
     </url>
     <url>
         <loc>http://traximus.github.io/robots.txt</loc>
-        <lastmod>2014-01-10T12:35:14+08:00</lastmod>
+        <lastmod>2014-02-11T15:52:31+08:00</lastmod>
     </url>
 </urlset>
