@@ -1,0 +1,340 @@
+---
+layout: post
+title: "如何使用instruments"
+date: 2014-02-11 16:03:08 +0800
+comments: true
+categories: iOS_App performance instruments
+---
+
+>源地址：<http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode>
+
+--------
+##学习使用Xcode的instruments工具来定位问题，优化你的app
+
+在你的iOS开发生涯中，你或许已经已经做过1到2个app，而且也明白如何做的更好。在给你的app添加新功能和特性的同时，你也应该注意另外一件事：使用`instruments`帮助优化你的app.
+
+这篇教程将会讲解如何使用`instruments`工具的重要功能来配合`Xcode`优化你的app，他可以帮你检查关于性能，内存泄漏以及其他问题。<!--more-->
+
+
+![instruments](/images/2014-02-11-01.png)
+
+
+**这篇文章中，你会接触到以下内容：**
+
+* 使用`Allocations` 以及 `Leaks`来检测并修复你代码中的内存管理问题
+* 使用`Time Profiler`定位你代码中的`hot-spots`,并教你如何让你的代码更加有效率；
+
+>注意：这篇教程的前提是你已经熟悉`Objective_C`和iOS开发相关知识，如果你是初学者，你可以看看其他的[教程](http://www.raywenderlich.com/tutorials);另外，本使用了`Xcode5`以及[storyboard](http://www.raywenderlich.com/5138/beginning-storyboards-in-ios-5-part-1)，你应该已经熟知相关内容。
+
+一切就绪，让我们一起沉侵于Instruments的奇妙世界！
+
+----------
+
+```
+instruments的打开途径有2种： 
+
+1. Xcode菜单栏->Product->Profile                                  用来分析当前Xcode项目
+2. Dock栏，右键单击Xcode图标->Open Developer Tools->Instruments     可以用来检测指定app的信息
+```
+
+
+---------
+
+
+##初步工作
+这篇教程为你提供了一个示例项目，我们将一步一步的按照教程，使用instruments对整个项目进行优化。[你可以从这里下载](http://cdn4.raywenderlich.com/downloads/InstrumentsTutorial.zip)
+
+下载项目以后，编译运行（假设我们输入关键字dog，搜索，然后点击results,可以看到类似于下面的页面：）
+
+![search results of 'dog'](/images/2014-02-11-02.png)
+
+大致浏览一下app，这个app的基本功能就是搜索flickr的照片，并进行展示。顶部有一个search bar，你输入关键字，进行搜索以后，会有一个results结果，点击结果，显示一个新的table，同时显示搜索到图片的预览。单击某一个图片预览，就会进入一个新页面，展示该图片；
+
+目前为止，一切和预期的一样，看起来没什么问题。无论如何，接下来你讲看到如何使用instruments发现这个app中众多潜在的问题，并进行调试优化，你会发现整个过程比你想象的要容易一些。
+
+----------
+
+##开始分析
+许多开发者在规划app的时候，总是充满了丰富的奇思妙想 - 事实上也确实是非常有价值的目标。然后他们阅读了一些类似于“过早优化”的类容，并且想知道如何避免这些糟糕的情况。
+
+从某种程度上来说，你可以在你的开发流程之外进行你的优化工作。现在的移动设备已经足够强大，但是作为开发者，你不能总是依赖于提升硬件和处理处速度来粉饰你app那超低的效率。
+
+**分析，要找对合适的地方**
+你可以花一个星期的时间微调某一个有趣的算法，但是如果这个算法只占总执行时间的0.5%，那么没有人会注意到其中的差别；但是另一方面，如果你花费大量精力去优化你程序所使用到的很耗时的循环，即使你只取得了10%的改善，效果会非常明显。
+
+
+
+####Time Profiler
+跟踪记录每一个method的CPU时间消耗，或者每一个线程的栈情况，先睹为快：
+
+![Time Profiler](/images/2014-02-11-03.png)
+
+![Time Profiler](/images/2014-02-11-04.png)
+
+这张图片显示了每一个线程的call stack，每一level或者frame,在被调用后，不同methods在程序中的调用路径，以及CPU当前执行到的位置 - 也就是frame 0。每一个method的时间消耗都可以从profiler进入该method的次数来判断。
+
+取个例子：如果有100份会消耗1毫秒的样本，而某一个method中在stack中调用了10份样本的话，你就可以粗略的推断出这个method会消耗10毫秒，这虽然是个近似值，但是很管用！
+
+
+
+**事不宜迟，现在开始使用instruments来进行分析**
+打开例子项目，在Xcode的菜单栏，```Product```->```Profile```，进入instruments界面。
+选择```Time Profiler```->```Profiler```，然后会在模拟器中运行app（这里可能还需要你输入密码，输入即可）
+
+
+现在，开始在模拟器中使用app，输入搜索关键字，在得到搜索结果以后，点击进入结果列表，直接滑动结果列表，或者点击查看一张image，你会发现，app反应非常的慢，真是太糟糕了！
+
+幸运的是，我们可以修复这个问题。首要目标就是找对instruments中相对应的分析器（确保instruments的View同时选中了这3种模式）
+![instruments view option](/images/2014-02-11-05.png)
+
+下面是instruments Time Profiler的主要区域
+
+![instruments Time Profiler Main section](/images/2014-02-11-06.jpeg)
+
+1. 开始 & 结束
+2. app运行计时器 - 时间表示app本次进行profile运行的时间， ```Run 1 of 1```表示app运行的次数（如果你stop后再重新start，会显示 ```Run 2 of 2```）
+3. app运行消耗轨迹 - 在Time Profiler状态，能清晰的表示出app的时间消耗
+4. 扩展的详细面板 - 在Time Profiler状态，主要显示instruments记录的栈记录
+5. 详细面板 - 主要展示了methods的时间消耗情况，可以简单的分析哪一个method占用了更多的CPU时间；当你点击某一个具体的method时，扩展面板会显示相应的栈记录
+6. option面板
+
+
+-------------
+
+
+##深入挖掘
+执行一次搜索，当获取到搜索结果以后，多尝试几次上下滑动；然后可以暂停Time Profiler，你会看到，刚才标记为3的区域，记录了很多CPU时间消耗.为了查明问题所在，你需要设置更多的Time Profiler选项。
+
+左下区域，选择```Separate by Thread```, ```Invert Call Tree```, ```Hide System Libraries``` ,  ```Show Obj-C Only```
+
+![instruments Time Profiler option](/images/2014-02-11-10.png)
+
+* Separate by Thread   : 单独区分每一个线程，让你能查看每一个线程的CPU消耗情况
+* Invert Call Tree     : 让被调用的method处于frame0位置，可以直观的看到调用的最深层次的method
+* Hide Missing Symbols : 当找不到dSYM文件时，此选项能帮助你仅显示完整识别的method名，其余method隐藏
+* Hide System Libraries: 仅显示你来自于你app的method信息（系统对CPU消耗，你无能为力）
+* Show Obj-C Only      : 仅显示Objective-C method
+* Flatten Recursion    : 对于递归method，仅作为一个入口，而不是多个
+* Top Functions        : 开启此功能，会对method的CPU占用时间做和统计（比如：A调用了B,那么统计A的时间时就会算上B的时间）
+
+
+设置Time Profiler之前
+![before Time Profiler option](/images/2014-02-11-07.png)
+
+设置Time Profiler之后
+![after Time Profiler option](/images/2014-02-11-08.png)
+
+仔细查看设置后的详细信息区域，发现CPU时间消耗，大部分都在`-[PhotoCell setPhoto:]`方法中，因为在tableView进行滚动的时候，cell一直在更新，而cell显示的photo也一直需要update；为了搞清楚具体情况，双击`-[PhotoCell setPhoto:]`，会看到下面的代码(我这里得到的信息和原文有点出入，我以实际情况为准)
+
+![PhotoCell setPhoto:](/images/2014-02-11-09.png)
+
+**如你所见，时间主要花在这两个部分：获取image data && create image，这就是问题所在：** 
+
+* [NSData dataWithContentsOfURL: 在data被下载之前会一直block（不返回），而且由于运行在main thread里面，会block UI，每一次请求都会花费一定时间,所以滑动的时候，多次请求就会让整个滑动过程非常糟糕。
+
+  解决的办法是异步加载image数据；点击instruments的这个位置（会自动打开Xcode，定位到相应的文件和代码区域）
+  ![open Xcode:](/images/2014-02-11-11.jpeg)
+  然后代码作如下改动
+  
+  ```
+  -(void)setPhoto:(FlikrPhoto *)photo
+  {
+  	_photo = photo;
+  	self.textLabel.text = photo.title;
+  	
+  	// NSData *imageData = [NSData dataWithContentsOfURL: _photo.thumbnailUrl];
+  	// self.imageView.image = [UIImage imageWithData: imageData];
+  	
+  	[[ImageCache sharedInstance] downloadImageAtURL: _photo.thumbnailUrl
+  									completionHandler:^(UIImage *image){
+  										self.imageView.image = image;
+  										[self setNeesLayout];
+  									}];
+  }
+  ```
+  然后再执行`Product`->`Profile`->`Time Profiler`->`Profile`,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。**接下来，我们能优化更多**；
+
+----------
+
+
+>关于 memory leaks(内存泄露),主要有2种。第一种我们叫做真实的memory leak(一个object在不再使用后没有被deallocated，导致这部分内存不能被重新使用)； 另一种就有点意思了，我们叫做`unbounded memory growth(无限制的内存增长)`，这种情况下，会不停的allocate内存但是一致没有机会被deallocated;
+memory leaks是非常严重的问题，因为他可能在某个时间导致耗尽你的系统内存，从而被iOS的系统watch dog关闭你的app；
+
+----------
+
+##超级重要的Allocations
+接下来，我们会使用Allocations仪器，帮助我们分析每一个object的内存分配和管理，当然也可以查看到一个object的内存计数器。
+
+`Product`->`Profile`->`Allocations`->`Profile`
+
+![Allocations](/images/2014-02-11-12.png)
+
+app会自动运行，然后你会看到类似于下面的情况
+
+![Allocations](/images/2014-02-11-13.png)
+
+这里你需要关注2大主要的跟踪记录：`Allocations`和`VM Tracker`；Allocations我们将会在接下来的时间详细讲解， VM Tracker也非常有用，只是稍微复杂一点。
+
+
+
+**我们做下面的实验，来找出例子项目中的内存问题：**
+
+*进行10次不同关键字的搜索（进入结果列表但是不要进入具体图片界面），确保每次搜索都有一些结果；然后让app等待几秒钟*；
+
+你应该已经注意到了，`Allocations`区域的图表记录一直在增长，也就是说，app在allocate新的内存；现在，我们需要尝试进行**`heap shot analysis`**：运行app的同时，点击左侧区域的`Mark Generation`按钮；
+
+```
+heap信息快照，主要是为了多次执行同一个操作，观察内存是否无限制的增长（这里我们点击一个搜索结果，然后等待图片加载，加载完毕以后，再换另一个搜索结果，再点击进入等待图片加载，如此返回，对多个搜索结果进行测试）
+你会看到类似于下面的情况：
+```
+![Mark Generation](/images/2014-02-11-14.png)
+
+通过上面的图，发现了一些问题：每次重新选择一个搜索结果，点击进入，图片加载以后再切换另一个搜索结果，内存总是在不停的增长；
+
+我们都知道，iOS系统有一个内存警告方法，当系统内存吃紧的时候，会发送这个消息，app可以在这个方法里面释放不需要的内存；我们可以在iOS模拟器里面模拟这个内存警告（硬件->模拟内存警告）.你会发现，内存确实骤降了一些，但是远远达不到我们的要求，肯定还有其他什么地方存在着内存问题。
+
+
+----------
+
+##查找内存消耗大户 - 无约束的内存增长
+
+第一次`Mark Generation`产生的数据作为一个基准，后面每一次`Mark Generation`产生的数据，都是以前面的mark作为参考对象，所以，你可以通过查看`Growth`这一列来看看，新增长了多少内存，展开查看到底哪些内存是新增的。
+
+
+#####展开其中一次记录，你会看到有如此多的objects，怎么处理呢？
+
+最好的方式，是查看你app直接使用的class相关信息，这个例子中，类似于`HTTPHeaderDict`, `CGRegion`, `CGPath`, `CFNumber`之类的对象，可以暂时忽略掉。
+
+我们关注一下ImageCache（或者UIImage）,因为你的app直接处理该类；找到ImageCache这个类，展开，可以在右边的详细面板看到具体信息
+
+![Mark Generation detail](/images/2014-02-11-15.png)
+
+#####具体分析
+
+右边的项目信息中，灰色部分是system library, 黑色部分是我们app的method,你可以双击黑色部分，进入到相应的代码段；我们来看这一段代码：
+
+```
+- (void)downloadImageAtURL:(NSURL*)url completionHandler:(ImageCacheDownloadCompletionHandler)completion {
+    UIImage *cachedImage = [self imageForKey:[url absoluteString]];
+    if (cachedImage) {
+        completion(cachedImage);
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:data];
+            [self setImage:image forKey:[url absoluteString]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(image);
+            });
+        });
+    }
+}
+```
+在这个方法内部，有一个[setImage: forKey:]方法，这个方法是将一个image对象存储到cache字典里，以防止再次使用（这就是问题所在，所以新的image出现以后，内存会不断的增长），现在我们来看这个方法实现：
+
+```
+- (void)setImage:(UIImage*)image forKey:(NSString*)key {
+    [_cache setObject:image forKey:key];
+}
+```
+这个方法就是以url为key，把image添加到cache字典里，但是我们注意到，image没有在任何地方release(问题出现在这里); cache只会添加新的image但是从来不会清除cache，多以会导致内存“无约束增长”（前面说到的第二种类型内存问题）;
+
+我们可以这样修复他：为imageCache这个类，添加监听memoryWarning的方法，当收到内存警告时，就清除cache；
+
+```
+//添加通知监听
+- (id)init {
+    if ((self = [super init])) {
+        _cache = [NSMutableDictionary new];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    }
+    return self;
+}
+
+//进行相应的处理
+- (void)memoryWarning:(NSNotification*)note {
+    [_cache removeAllObjects];
+}
+```
+**处理完毕，为了确保已经修复这个问题，我们关闭instruments，再次重新进入`Allocations`，和之前差不多，先搜索多个不同的关键字，然后先`Mark Generation`->选择一个结果->进入结果列表->等待图片加载完毕->【模拟内存警告】，再`Mark Generation`->选择另一个结果并接入结果列表->等待图片加载->【模拟内存警告】；如此反复；如果内存没有像之前那样不停的增长，那么，我们搞定他了。**
+
+这是我这实际测试的情况
+
+![Mark Generation](/images/2014-02-11-16.png)
+
+
+
+-----------
+
+##查找对象的memory leaks - 真实的内存泄露
+现在，我们来查找一下app中的第一种类型内存问题（一个object不再使用以后，没有得到释放）
+
+在Xcode菜单栏，`Product`->`Profile`->`Leaks`->`Profile`；
+
+![Leaks](/images/2014-02-11-17.png)
+
+`Leaks`仪器主要包含2种类型记录：`Allocations`和`Leaks`;其中的`Allocations`仪器和之前使用的一样，现在需要着重关注`Leaks`
+
+![Leaks window](/images/2014-02-11-18.png)
+
+上图中，你会看到，默认的```Automatic Snapshotting```已经被选中，也就是说，只要有内存泄露，就会立即反应出来（上图中的红色竖线标记位置）；默认的自动记录时间间隔是10秒，你也可以随时按下```Snapshot Now```按钮在记录当前数据.
+
+![Snapshot](/images/2014-02-11-19.png)
+
+
+#####找到内存泄露并搞定他
+运行app，执行搜索，进入搜索结果，点击进入某一张图片页面，然后执行```Rotate```操作，你会看到红色竖线标记的内存泄露。现在，我们打开扩展信息面板，你会看到类似于下面的信息：
+
+![Leaks extend detail info](/images/2014-02-11-20.png)
+
+所有问题都指向```rotateTapped```这个方法，我们现在来仔细的研究一个这段代码
+
+```
+- (void)rotateTapped:(id)sender {
+    UIImage *currentImage = _imageView.image;
+    CGImageRef currentCGImage = currentImage.CGImage;
+ 
+    CGSize originalSize = currentImage.size;
+    CGSize rotatedSize = CGSizeMake(originalSize.height, originalSize.width);
+ 
+    CGContextRef context = CGBitmapContextCreate(NULL,
+                                                 rotatedSize.width,
+                                                 rotatedSize.height,
+                                                 CGImageGetBitsPerComponent(currentCGImage),
+                                                 CGImageGetBitsPerPixel(currentCGImage) * rotatedSize.width,
+                                                 CGImageGetColorSpace(currentCGImage),
+                                                 CGImageGetBitmapInfo(currentCGImage));
+ 
+    CGContextTranslateCTM(context, rotatedSize.width, 0.0f);
+    CGContextRotateCTM(context, M_PI_2);
+    CGContextDrawImage(context, (CGRect){.origin=CGPointZero, .size=originalSize}, currentCGImage);
+ 
+    CGImageRef newCGImage = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:newCGImage];
+ 
+    self.imageView.image = newImage;
+}
+```
+
+**很多人都认为`ARC`能够处理好内存相关问题，只要使用了`ARC`，其他就不用管了；但事实上，`ARC`仅仅能正确地管理`Objective-C`对象，而上述代码中的`CoreFoundation`对象，就必须手动管理了。**
+
+>CoreFoundation对象的内存管理规则：create,copy是拥有该对象，不再使用时，需要CFRelease();其他方式不需要释放；另外，当把一个object传递到一个方法中的时候，receiver不拥有该参数对象，因此该object可能在任何时间被deallocate掉，这个时候，receiver可以使用CFRetain（）主动维护该object; 另外，CF对象的拷贝，推荐使用CFXXCreateCopy()方法，而不是mutable拷贝（其中的XX表示类型，比如CFStringCreateCopy）
+
+
+现在检查一下上面的代码段，你会发现，`context`和`newCGImage`没有进行相应的释放;因为，在上述方法结束前添加下面的代码：
+
+```
+CGImageRelease(newCGImage);
+CGContextRelease(context);
+```
+
+OK，现在重新编译，运行app，在```Leaks```中检查，执行rotate操作，你会发现没有内存泄露了。我们搞定他了！
+
+-----------
+
+##接下来你可以干点什么
+你应该尽量让instruments称为你开发流程的一部分，以确保你开发出牛逼而有用的app！
+
+---------
+
+####这篇文章主要是讲解如何使用instruments来诊断app中可能存在的问题，主要是优化CPU时间消耗，查找潜在的内存问题并修复他们。由于我自己对Instruments也不是很熟悉，所以这是我自己的学习笔记，并没有完全按照原文翻译。原文使用的Xcode4版本，我使用的Xcode5所以存在少量的出入。上面的过程已经经过我自己的实践，希望能帮助到其他同学。
