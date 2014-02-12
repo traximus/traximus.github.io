@@ -14,7 +14,9 @@ app拥有良好的性能非常重要，这是保证良好用户体验的基石�
 ##1.ARC
 新项目现在一般都是基于ARC了，就算使用ARC，很多情况下，还是会有内存泄露的情况存在，所以使用instrument就很必要了。
 
-**如何使用instrument：<http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode>**
+**如何使用instrument：英文<http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode>**
+
+**如何使用instrument：中文<http://traximus.github.io/blog/2014/02/11/ru-he-shi-yong-instruments/>**
 
 
 ---------
