@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-02-11T18:20:31+08:00</updated>
+  <updated>2014-02-12T10:03:47+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -479,7 +479,9 @@ memory leaks是非常严重的问题，因为他可能在某个时间导致耗�
 
 <p>新项目现在一般都是基于ARC了，就算使用ARC，很多情况下，还是会有内存泄露的情况存在，所以使用instrument就很必要了。</p>
 
-<p><strong>如何使用instrument：<a href="http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode">http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode</a></strong></p>
+<p><strong>如何使用instrument：英文<a href="http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode">http://www.raywenderlich.com/23037/how-to-use-instruments-in-xcode</a></strong></p>
+
+<p><strong>如何使用instrument：中文<a href="http://traximus.github.io/blog/2014/02/11/ru-he-shi-yong-instruments/">http://traximus.github.io/blog/2014/02/11/ru-he-shi-yong-instruments/</a></strong></p>
 
 <hr />
 
