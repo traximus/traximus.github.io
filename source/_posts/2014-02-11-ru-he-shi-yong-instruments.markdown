@@ -59,7 +59,9 @@ instruments的打开途径有2种：
 
 从某种程度上来说，你可以在你的开发流程之外进行你的优化工作。现在的移动设备已经足够强大，但是作为开发者，你不能总是依赖于提升硬件和处理处速度来粉饰你app那超低的效率。
 
+
 **分析，要找对合适的地方**
+
 你可以花一个星期的时间微调某一个有趣的算法，但是如果这个算法只占总执行时间的0.5%，那么没有人会注意到其中的差别；但是另一方面，如果你花费大量精力去优化你程序所使用到的很耗时的循环，即使你只取得了10%的改善，效果会非常明显。
 
 
@@ -133,6 +135,7 @@ instruments的打开途径有2种：
 * [NSData dataWithContentsOfURL: 在data被下载之前会一直block（不返回），而且由于运行在main thread里面，会block UI，每一次请求都会花费一定时间,所以滑动的时候，多次请求就会让整个滑动过程非常糟糕。
 
   解决的办法是异步加载image数据；点击instruments的这个位置（会自动打开Xcode，定位到相应的文件和代码区域）
+  
   ![open Xcode:](/images/2014-02-11-11.jpeg)
   然后代码作如下改动
   
@@ -152,6 +155,7 @@ instruments的打开途径有2种：
   									}];
   }
   ```
+  
   然后再执行`Product`->`Profile`->`Time Profiler`->`Profile`,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。**接下来，我们能优化更多**；
 
 ----------
@@ -184,7 +188,8 @@ app会自动运行，然后你会看到类似于下面的情况
 你应该已经注意到了，`Allocations`区域的图表记录一直在增长，也就是说，app在allocate新的内存；现在，我们需要尝试进行**`heap shot analysis`**：运行app的同时，点击左侧区域的`Mark Generation`按钮；
 
 ```
-heap信息快照，主要是为了多次执行同一个操作，观察内存是否无限制的增长（这里我们点击一个搜索结果，然后等待图片加载，加载完毕以后，再换另一个搜索结果，再点击进入等待图片加载，如此返回，对多个搜索结果进行测试）
+heap信息快照，主要是为了多次执行同一个操作，观察内存是否无限制的增长（这里我们点击一个搜索结果，然后等待图片加载，
+加载完毕以后，再换另一个搜索结果，再点击进入等待图片加载，如此返回，对多个搜索结果进行测试）
 你会看到类似于下面的情况：
 ```
 ![Mark Generation](/images/2014-02-11-14.png)
@@ -246,7 +251,9 @@ heap信息快照，主要是为了多次执行同一个操作，观察内存是�
 - (id)init {
     if ((self = [super init])) {
         _cache = [NSMutableDictionary new];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+        							selector:@selector(memoryWarning:)        
+        							name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     }
     return self;
 }
