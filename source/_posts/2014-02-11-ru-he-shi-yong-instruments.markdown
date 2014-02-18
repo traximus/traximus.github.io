@@ -139,7 +139,7 @@ instruments的打开途径有2种：
   ![open Xcode:](/images/2014-02-11-11.jpeg)
   然后代码作如下改动
   
-  ```
+```
   -(void)setPhoto:(FlikrPhoto *)photo
   {
   	_photo = photo;
@@ -154,7 +154,8 @@ instruments的打开途径有2种：
   										[self setNeesLayout];
   									}];
   }
-  ```
+  
+```
   
   然后再执行`Product`->`Profile`->`Time Profiler`->`Profile`,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。**接下来，我们能优化更多**；
 
