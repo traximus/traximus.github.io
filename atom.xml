@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-02-18T16:45:32+08:00</updated>
+  <updated>2014-02-18T17:13:39+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -154,28 +154,43 @@
 <p>解决的办法是异步加载image数据；点击instruments的这个位置（会自动打开Xcode，定位到相应的文件和代码区域）</p>
 
 <p><img src="http://traximus.github.io/images/2014-02-11-11.jpeg" alt="open Xcode:" />
-然后代码作如下改动</p>
-
-<p>&#8220;`
-&ndash;(void)setPhoto:(FlikrPhoto *)photo
-{
-  _photo = photo;
-  self.textLabel.text = photo.title;</p>
-
-<p>  // NSData *imageData = [NSData dataWithContentsOfURL: _photo.thumbnailUrl];
-  // self.imageView.image = [UIImage imageWithData: imageData];</p>
-
-<p>  [[ImageCache sharedInstance] downloadImageAtURL: _photo.thumbnailUrl
-                                  completionHandler:^(UIImage *image){
-                                      self.imageView.image = image;
-                                      [self setNeesLayout];
-                                  }];
-}
-&#8220;`</p>
-
-<p>然后再执行<code>Product</code>&ndash;><code>Profile</code>&ndash;><code>Time Profiler</code>&ndash;><code>Profile</code>,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。<strong>接下来，我们能优化更多</strong>；</p></li>
+然后代码作如下改动</p></li>
 </ul>
 
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  -(void)setPhoto:(FlikrPhoto *)photo
+</span><span class='line'>  {
+</span><span class='line'>      _photo = photo;
+</span><span class='line'>      self.textLabel.text = photo.title;
+</span><span class='line'>      
+</span><span class='line'>      // NSData *imageData = [NSData dataWithContentsOfURL: _photo.thumbnailUrl];
+</span><span class='line'>      // self.imageView.image = [UIImage imageWithData: imageData];
+</span><span class='line'>      
+</span><span class='line'>      [[ImageCache sharedInstance] downloadImageAtURL: _photo.thumbnailUrl
+</span><span class='line'>                                      completionHandler:^(UIImage *image){
+</span><span class='line'>                                          self.imageView.image = image;
+</span><span class='line'>                                          [self setNeesLayout];
+</span><span class='line'>                                      }];
+</span><span class='line'>  }
+</span><span class='line'>  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>  然后再执行<code>Product</code>&ndash;><code>Profile</code>&ndash;><code>Time Profiler</code>&ndash;><code>Profile</code>,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。<strong>接下来，我们能优化更多</strong>；</p>
 
 <hr />
 
