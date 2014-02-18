@@ -148,8 +148,9 @@
 
 <p>从某种程度上来说，你可以在你的开发流程之外进行你的优化工作。现在的移动设备已经足够强大，但是作为开发者，你不能总是依赖于提升硬件和处理处速度来粉饰你app那超低的效率。</p>
 
-<p><strong>分析，要找对合适的地方</strong>
-你可以花一个星期的时间微调某一个有趣的算法，但是如果这个算法只占总执行时间的0.5%，那么没有人会注意到其中的差别；但是另一方面，如果你花费大量精力去优化你程序所使用到的很耗时的循环，即使你只取得了10%的改善，效果会非常明显。</p>
+<p><strong>分析，要找对合适的地方</strong></p>
+
+<p>你可以花一个星期的时间微调某一个有趣的算法，但是如果这个算法只占总执行时间的0.5%，那么没有人会注意到其中的差别；但是另一方面，如果你花费大量精力去优化你程序所使用到的很耗时的循环，即使你只取得了10%的改善，效果会非常明显。</p>
 
 <h4>Time Profiler</h4>
 
@@ -222,8 +223,9 @@
 <ul>
 <li><p>[NSData dataWithContentsOfURL: 在data被下载之前会一直block（不返回），而且由于运行在main thread里面，会block UI，每一次请求都会花费一定时间,所以滑动的时候，多次请求就会让整个滑动过程非常糟糕。</p>
 
-<p>解决的办法是异步加载image数据；点击instruments的这个位置（会自动打开Xcode，定位到相应的文件和代码区域）
-<img src="/images/2014-02-11-11.jpeg" alt="open Xcode:" />
+<p>解决的办法是异步加载image数据；点击instruments的这个位置（会自动打开Xcode，定位到相应的文件和代码区域）</p>
+
+<p><img src="/images/2014-02-11-11.jpeg" alt="open Xcode:" />
 然后代码作如下改动</p>
 
 <p>&#8220;`
@@ -241,8 +243,9 @@
                                       [self setNeesLayout];
                                   }];
 }
-<code>``
-然后再执行</code>Product<code>-&gt;</code>Profile<code>-&gt;</code>Time Profiler<code>-&gt;</code>Profile`,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。<strong>接下来，我们能优化更多</strong>；</p></li>
+&#8220;`</p>
+
+<p>然后再执行<code>Product</code>&ndash;><code>Profile</code>&ndash;><code>Time Profiler</code>&ndash;><code>Profile</code>,搜索，然后在结果列表界面进行滑动，你会发现，上下滑动结果的时候，顺畅多了。<strong>接下来，我们能优化更多</strong>；</p></li>
 </ul>
 
 
@@ -275,7 +278,9 @@ memory leaks是非常严重的问题，因为他可能在某个时间导致耗�
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heap信息快照，主要是为了多次执行同一个操作，观察内存是否无限制的增长（这里我们点击一个搜索结果，然后等待图片加载，加载完毕以后，再换另一个搜索结果，再点击进入等待图片加载，如此返回，对多个搜索结果进行测试）
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heap信息快照，主要是为了多次执行同一个操作，观察内存是否无限制的增长（这里我们点击一个搜索结果，然后等待图片加载，
+</span><span class='line'>加载完毕以后，再换另一个搜索结果，再点击进入等待图片加载，如此返回，对多个搜索结果进行测试）
 </span><span class='line'>你会看到类似于下面的情况：</span></code></pre></td></tr></table></div></figure>
 
 
@@ -362,11 +367,15 @@ memory leaks是非常严重的问题，因为他可能在某个时间导致耗�
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>//添加通知监听
 </span><span class='line'>- (id)init {
 </span><span class='line'>    if ((self = [super init])) {
 </span><span class='line'>        _cache = [NSMutableDictionary new];
-</span><span class='line'>        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+</span><span class='line'>        [[NSNotificationCenter defaultCenter] addObserver:self 
+</span><span class='line'>                                  selector:@selector(memoryWarning:)        
+</span><span class='line'>                                  name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 </span><span class='line'>    }
 </span><span class='line'>    return self;
 </span><span class='line'>}
