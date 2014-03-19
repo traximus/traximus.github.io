@@ -32,6 +32,8 @@ footer: true
 ##Dribbble
 <http://dribbble.com>
 
+<http://flatuicolors.com>
+
 -------
 
 ##Apple Developer iOS resource
