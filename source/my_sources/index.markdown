@@ -23,6 +23,13 @@ footer: true
 
 ----------
 
+
+##GitHub
+<https://github.com>
+
+
+-------------
+
 ##robots.thoughtbot
 <http://robots.thoughtbot.com>
 
