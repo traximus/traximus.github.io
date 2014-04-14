@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Other | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/other/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-04-01T17:10:54+08:00</updated>
+  <updated>2014-04-14T18:53:49+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WebDAV助手1.2]]></title>
+    <link href="http://traximus.github.io/blog/2014/03/25/webdavzhu-shou-1-dot-2/"/>
+    <updated>2014-03-25T18:38:23+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/03/25/webdavzhu-shou-1-dot-2</id>
+    <content type="html"><![CDATA[<blockquote><p>经过一段时间的折腾，WebDAV助手1.2终于在20号上线了, <a href="https://itunes.apple.com/cn/app/webdav-zhu-shou-jian-dan-fang/id659323471?mt=8">iTunes地址</a>。 这个版本是过渡版本，主要是是做了进一步的iOS7适配，以及部分文件访问逻辑进行了调整； 最主要的目的，就是为下一个版本更新做准备。<!--more--></p></blockquote>
+
+<h4>部分截图</h4>
+
+<p><img src="/images/2014-03-25-01.png" alt="summary" /></p>
+
+<p><img src="/images/2014-03-25-02.png" alt="update" /></p>
+
+<hr />
+
+<h4>这个业余项目，主要是想用自己学到的技术，试试能不能做个像样的小东西出来。过程还是酸甜苦辣咸都有。</h4>
+
+<h4>目前不满意的部分，主要是这几个部分，也相当于是改进计划吧</h4>
+
+<ul>
+<li>icon &ndash;  毕竟我不是美术专业人员，弄出这么个东西都是靠<code>Androidify</code>帮忙，项改进得另想他法</li>
+<li>交互体验  &ndash;  目前的交互，是学习dropbox做的，感觉不是很适合这个app的多服务器切换模式；目前计划是下个版本，更新为<code>Yahoo天气</code>的结构</li>
+<li>网络访问 &ndash; 目前使用的是系统默认的网络访问，而且管理网络的单例写的并不是很好，总感觉效率还有待提高；下一个版本可能替换为<a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a></li>
+<li>本地文件共享 &ndash; 目前尚未加入，考虑下一个版本添加进来</li>
+<li>AirDrop文件分享 &ndash; 由于AirDrop仅仅支持iPhone5, iPad4, iPad mini, iPod touch 5，可能要放弃一部分用户了。</li>
+</ul>
+
+
+<hr />
+
+<h4>说实话，这种专业性比较强的app，对于我这种后进者来说，除非做的很出彩，不然很难被广泛接受；唯一不足的，是我原本以为的重点功能还没有被人发掘使用（将iPod音乐库的音乐导出来，上传到设定的WebDAV服务器）+_+</h4>
+
+<p>不过既然是作为业余爱好，我会长期坚持下去，总能把这个项目做得越来越好的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Test Markdown]]></title>
