@@ -7,7 +7,7 @@
 	<meta name="author" content="traximus">
 
 	
-	<meta name="description" content="Apr 2nd, 2014 iOS Comments 关于64下的int和NSInteger转换 发发牢骚 之前做了一个项目，和我们自己服务器交互的时候，私有协议会然后一个状态码，标识当前操作的状态。app去解析这个状态码，然后把网络字节序转换成本地字节序，解读状态码，进行相应的操作。 &hellip;">
+	<meta name="description" content="Mar 25th, 2014 other Comments WebDAV助手1.2 经过一段时间的折腾，WebDAV助手1.2终于在20号上线了, iTunes地址。 这个版本是过渡版本，主要是是做了进一步的iOS7适配，以及部分文件访问逻辑进行了调整； 最主要的目的，就是为下一个版本更新做准备 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,114 +91,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-02T17:22:51+08:00" data-updated="true" itemprop="datePublished">Apr 2<span>nd</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>iOS</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2014/04/02/guan-yu-64xia-de-inthe-nsintegerzhuan-huan/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/04/02/guan-yu-64xia-de-inthe-nsintegerzhuan-huan/" itemprop="url">关于64下的int和NSInteger转换</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h3>发发牢骚</h3>
-
-<blockquote><p>之前做了一个项目，和我们自己服务器交互的时候，私有协议会然后一个状态码，标识当前操作的状态。app去解析这个状态码，然后把网络字节序转换成本地字节序，解读状态码，进行相应的操作。本来这个过程很简单，之前测试也一直没有出过任何错误。但是今天各种调试通不过，花了很长时间才发现，他妈的居然是32位和64位的兼容性问题。NSInteger修改为int，问题立马消失了。</p></blockquote>
-
-<hr />
-
-<p>之前一直使用NSInteger接收4字节bytes，然后转换字节序，一切正常；今天测试的时候，发现服务器返回的字节流<code>FFFF FFFF FFFF FFFE</code>，转换后应该是-2，但是死活不对。一问，发现服务器端没有修改过，我这边也没有动过，怎么会这样呢？</p>
-
-<h3>然后开始做实验</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>1. NSInteger testN1 = -2;
-</span><span class='line'>   NSData *testData1 = [NSData dataWithBytes:&testN1 length:4];
-</span><span class='line'>   [GlobalAddtions printDetailData:testData1];
-</span><span class='line'>   
-</span><span class='line'>   打印结果： FEFF FFFF FFFF FFFF
-</span><span class='line'>                        
-</span><span class='line'>2. NSInteger testN2 = htonl(testN1);
-</span><span class='line'>   NSData *testData2 = [NSData dataWithBytes:&testN2 length:4];
-</span><span class='line'>   [GlobalAddtions printDetailData:testData2];
-</span><span class='line'>   打印结果： FFFF FFFF FFFF FFFE
-</span><span class='line'>   
-</span><span class='line'>   打印出原字节流，发现也是 FFFF FFFF FFFF FFFE
-</span><span class='line'>   
-</span><span class='line'>   那么，按理说，这个转换应该就是没有问题的。
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>于是，继续做实验</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>1. NSInteger testN3;
-</span><span class='line'>   [testData2 getBytes:&testN3 length:4];
-</span><span class='line'>   NSLog(@"%d",testN3);
-</span><span class='line'>   
-</span><span class='line'>   按照理解，testData2的字节流，就是服务器发送过来，转换以后的字节流，那么，转回去应该就为-2；
-</span><span class='line'>   
-</span><span class='line'>   但是，经过打印测试，testN3居然不等于testN2
-</span><span class='line'>   
-</span><span class='line'>                        
-</span><span class='line'>2. NSInteger testN4 = ntohl(testN3);
-</span><span class='line'>   NSLog(@"%d",testN4);
-</span><span class='line'>   
-</span><span class='line'>   这里打印，testN4也不等于-2</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>但是，明明所有的字节流打印出来都是没错的，这是为什么呢？</em></p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
