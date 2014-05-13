@@ -3,7 +3,7 @@ layout: post
 title: "WebDAV助手1.2"
 date: 2014-03-25 18:38:23 +0800
 comments: true
-categories: 
+categories: other
 ---
 >经过一段时间的折腾，WebDAV助手1.2终于在20号上线了, [iTunes地址](https://itunes.apple.com/cn/app/webdav-zhu-shou-jian-dan-fang/id659323471?mt=8)。 这个版本是过渡版本，主要是是做了进一步的iOS7适配，以及部分文件访问逻辑进行了调整； 最主要的目的，就是为下一个版本更新做准备。<!--more-->
 
