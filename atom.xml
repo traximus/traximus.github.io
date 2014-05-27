@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-05-13T18:46:02+08:00</updated>
+  <updated>2014-05-27T20:17:48+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,180 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Storyboard相关笔记]]></title>
+    <link href="http://traximus.github.io/blog/2014/05/27/storyboardxiang-guan-bi-ji/"/>
+    <updated>2014-05-27T19:08:52+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/05/27/storyboardxiang-guan-bi-ji</id>
+    <content type="html"><![CDATA[<blockquote><h4>Storyboard出来这个么长时间了，我自己使用的却不是很多，也不够熟练，这里只是简单的记录一下相关笔记，主要是搞清楚segue，scene,以及他们之间的跳转关系，部分资料也是参考别人的整理。<!--more--></h4></blockquote>
+
+<h5>首先简单看一下</h5>
+
+<p><img src="http://traximus.github.io/images/2014-05-27-01.png" alt="summary" /></p>
+
+<p>一个<code>Storyboard</code>管理多个<code>VC</code>，这多个<code>VC</code>就看做是多个<code>scene</code>,视图之间的跳转关系定义都可以在<code>Storyboard</code>中完成。</p>
+
+<hr />
+
+<h2>segue类型介绍</h2>
+
+<p>这里的简介转载自<a href="http://www.2cto.com/kf/201210/161737.html">http://www.2cto.com/kf/201210/161737.html</a></p>
+
+<blockquote><p>在storyboard中，segue有几种不同的类型，且iPhone和iPad对应的segue也不尽相同；</p>
+
+<p>在iPhone中，segue有push， modal，custom三种不同类型，这些segue定义了跳转时分别对应的方式；</p>
+
+<p>在iPad中，segue有push， modal，replace, popover， custom五种方式；</p></blockquote>
+
+<ul>
+<li>modal 模态视图，弹出的模态视图，用户只能在该View上响应，不再使用，需要dismiss</li>
+<li>push  配合导航栏NavigationController一起使用，从右侧划入的方式</li>
+<li>popover 浮动窗视图，iPad专用；</li>
+<li>replace  替换当前scene， iPad专用</li>
+<li>custom  自定义跳转方式</li>
+</ul>
+
+
+<hr />
+
+<h2>Storyboard的创建</h2>
+
+<ol>
+<li>可以直接使用项目默认的storyboard，也可以自己添加多个storyboard;</li>
+<li><p>获取storyboard</p>
+
+<p><code>+ (UIStoryboard *)storyboardWithName:(NSString *)name bundle:(NSBundle *)storyboardBundleOrNil</code></p></li>
+<li><p>获取storyboard中的某个VC，然后对该VC进行相应的segue操作</p>
+
+<p><code>- (id)instantiateInitialViewController;</code></p>
+
+<p><code>- (id)instantiateViewControllerWithIdentifier:(NSString *)identifier;</code></p></li>
+<li>一个VC在被触发跳转之间，会调用下面的方法，一般进行数据传递</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// In a storyboard-based application,  do a little preparation before navigation
+</span><span class='line'>- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+</span><span class='line'>{
+</span><span class='line'>  // used to transfer some data to new VC
+</span><span class='line'>          // Get the new view controller using [segue destinationViewController].
+</span><span class='line'>  // Pass the selected object to the new view controller.
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>对于一个VC，可以使用下面的方法，来指定执行哪一个segue(如果该VC指定了多个segue)，或者查询segue是否可用</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>- (void)performSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+</span><span class='line'>
+</span><span class='line'>- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender 
+</span><span class='line'>
+</span><span class='line'>// Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing.
+</span><span class='line'>// The default implementation returns YES. 
+</span><span class='line'>// This method is not invoked when -performSegueWithIdentifier:sender: is used.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>对于一个VC，可以指定segue类型为modal时的style</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>/*
+</span><span class='line'>      Defines the transition style that will be used for this view controller when it is 
+</span><span class='line'>      presented modally. Set this property on the view controller to be presented, not the presenter.
+</span><span class='line'>      Defaults to UIModalTransitionStyleCoverVertical.
+</span><span class='line'>*/
+</span><span class='line'>
+</span><span class='line'>@property(nonatomic,assign) UIModalTransitionStyle modalTransitionStyle NS_AVAILABLE_IOS(3_0);
+</span><span class='line'>@property(nonatomic,assign) UIModalPresentationStyle modalPresentationStyle NS_AVAILABLE_IOS(3_2);
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>**UIModalTransitionStyle &amp;&amp; UIModalPresentationStyle 的定义为：**
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>typedef NS_ENUM(NSInteger, UIModalTransitionStyle) {
+</span><span class='line'>  UIModalTransitionStyleCoverVertical = 0,
+</span><span class='line'>  UIModalTransitionStyleFlipHorizontal,
+</span><span class='line'>  UIModalTransitionStyleCrossDissolve,
+</span><span class='line'>  UIModalTransitionStylePartialCurl,
+</span><span class='line'>};
+</span><span class='line'>
+</span><span class='line'>typedef NS_ENUM(NSInteger, UIModalPresentationStyle) {
+</span><span class='line'>  UIModalPresentationFullScreen = 0,
+</span><span class='line'>  UIModalPresentationPageSheet,
+</span><span class='line'>  UIModalPresentationFormSheet,
+</span><span class='line'>  UIModalPresentationCurrentContext,
+</span><span class='line'>  UIModalPresentationCustom,
+</span><span class='line'>  UIModalPresentationNone = -1,               
+</span><span class='line'>};
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h2>Storyboard的简单使用</h2>
+
+<ol>
+<li><p>一般情况下，一个storyboard至少管理者一个scene，对于VC之间的跳转segue可以直接从能触发的控件，
+按住Control，然后连接到另一个你需要跳转的VC上，记住，你最好给segue设置一个identifier。</p></li>
+<li><p>同时，你可以不指定segue，只给某一个VC指定一个Storyboard ID, 在使用的时候，直接调用下面的方法来获取VC</p>
+
+<p> <code>- (id)instantiateViewControllerWithIdentifier:(NSString *)identifier;</code></p></li>
+</ol>
+
+
+<hr />
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[WebDAV助手1.2]]></title>
