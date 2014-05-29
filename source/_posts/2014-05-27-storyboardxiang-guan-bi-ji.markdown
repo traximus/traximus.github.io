@@ -3,7 +3,7 @@ layout: post
 title: "Storyboard相关笔记"
 date: 2014-05-27 19:08:52 +0800
 comments: true
-categories: iOS_App,storyboard
+categories: iOS_App  storyboard
 ---
 
 >####Storyboard出来这个么长时间了，我自己使用的却不是很多，也不够熟练，这里只是简单的记录一下相关笔记，主要是搞清楚segue，scene,以及他们之间的跳转关系，部分资料也是参考别人的整理。<!--more-->
