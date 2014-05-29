@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: iOS_App,storyboard | Traximus‘pages]]></title>
-  <link href="http://traximus.github.io/blog/categories/ios-app-storyboard/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Storyboard | Traximus‘pages]]></title>
+  <link href="http://traximus.github.io/blog/categories/storyboard/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-05-27T20:17:48+08:00</updated>
+  <updated>2014-05-29T10:23:54+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
