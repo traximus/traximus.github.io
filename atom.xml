@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-07-17T19:14:48+08:00</updated>
+  <updated>2014-07-17T19:22:07+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -88,48 +88,75 @@
 <li><p>你会发现，你tableView上面cell，显示为prototype cells; 这里cell的数量，可以根据你的实际需要，进行添加或者减少；当然，每一行cell仍然可以完全自定义contentView； （我这里自定义了2个不同的cell，同时，<strong>需要分别设置不同的<code>reuse identifier</code></strong>）</p>
 
 <p> <img src="http://traximus.github.io/images/2014-07-17-07.png" alt="summary" />    <img src="http://traximus.github.io/images/2014-07-17-08.png" alt="summary" /></p></li>
-<li><p>然后，在对应的.m文件中，直接根据cell的reuse identifier即可；</p>
-
-<p>&#8220;`</p>
-
-<ul>
-<li>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath
-{
-NSString </em>cellIdentifier;
-if (indexPath.row!=[datasource count]-1) {
-   cellIdentifier = @&ldquo;prototypeCell_TableViewController&rdquo;;
-}
-else{
-   cellIdentifier = @&ldquo;cell2&rdquo;;
-}
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];</li>
-</ul>
-
-
-<p> // Configure the cell
- CellDataModel *cellData = [datasource objectAtIndex:indexPath.row];</p>
-
-<p> if (indexPath.row!=[datasource count]) {
-     UILabel <em>titleLabel = (UILabel </em>)[cell viewWithTag:Label_Tag];
-     UIButton <em>buttonT = (UIButton </em>)[cell viewWithTag:Button_Tag];
-     UISegmentedControl <em>segC = (UISegmentedControl </em>)[cell viewWithTag:SegmengControl_Tag];
-     titleLabel.text = cellData.title;
-     [buttonT setTitle:cellData.buttonTitle forState:UIControlStateNormal];
-     [segC setSelectedSegmentIndex:cellData.selectedIndex];
- }
- else{
-     cell.textLabel.text = cellData.title;
-     cell.detailTextLabel.text = cellData.buttonTitle;
- }</p>
-
-<p> return cell;
-}
-&#8220;`
-然后运行，大概就是这个样子：</p>
-
-<p>   <img src="http://traximus.github.io/images/2014-07-17-09.png" alt="summary" /></p></li>
+<li><p>然后，在对应的.m文件中，直接根据cell的reuse identifier即可；</p></li>
 </ol>
 
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+</span><span class='line'>{
+</span><span class='line'>    NSString *cellIdentifier;
+</span><span class='line'>    if (indexPath.row!=[datasource count]-1) {
+</span><span class='line'>        cellIdentifier = @"prototypeCell_TableViewController";
+</span><span class='line'>    }
+</span><span class='line'>    else{
+</span><span class='line'>        cellIdentifier = @"cell2";
+</span><span class='line'>    }
+</span><span class='line'>    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+</span><span class='line'>    
+</span><span class='line'>    // Configure the cell
+</span><span class='line'>    CellDataModel *cellData = [datasource objectAtIndex:indexPath.row];
+</span><span class='line'>    
+</span><span class='line'>    if (indexPath.row!=[datasource count]) {
+</span><span class='line'>        UILabel *titleLabel = (UILabel *)[cell viewWithTag:Label_Tag];
+</span><span class='line'>        UIButton *buttonT = (UIButton *)[cell viewWithTag:Button_Tag];
+</span><span class='line'>        UISegmentedControl *segC = (UISegmentedControl *)[cell viewWithTag:SegmengControl_Tag];
+</span><span class='line'>        titleLabel.text = cellData.title;
+</span><span class='line'>        [buttonT setTitle:cellData.buttonTitle forState:UIControlStateNormal];
+</span><span class='line'>        [segC setSelectedSegmentIndex:cellData.selectedIndex];
+</span><span class='line'>    }
+</span><span class='line'>    else{
+</span><span class='line'>        cell.textLabel.text = cellData.title;
+</span><span class='line'>        cell.detailTextLabel.text = cellData.buttonTitle;
+</span><span class='line'>    }
+</span><span class='line'>    
+</span><span class='line'>    return cell;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后运行，大概就是这个样子：</p>
+
+<pre><code> ![summary](/images/2014-07-17-09.png)
+</code></pre>
 
 <h4>3. VC3  &ndash; 基于UIViewController的prototype cell</h4>
 

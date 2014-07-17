@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS_App | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/ios-app/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-07-17T19:14:48+08:00</updated>
+  <updated>2014-07-17T19:22:07+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -88,48 +88,50 @@
 <li><p>你会发现，你tableView上面cell，显示为prototype cells; 这里cell的数量，可以根据你的实际需要，进行添加或者减少；当然，每一行cell仍然可以完全自定义contentView； （我这里自定义了2个不同的cell，同时，<strong>需要分别设置不同的<code>reuse identifier</code></strong>）</p>
 
 <p> <img src="/images/2014-07-17-07.png" alt="summary" />    <img src="/images/2014-07-17-08.png" alt="summary" /></p></li>
-<li><p>然后，在对应的.m文件中，直接根据cell的reuse identifier即可；</p>
+<li><p>然后，在对应的.m文件中，直接根据cell的reuse identifier即可；</p></li>
+</ol>
+
+
+<p>```
+   &ndash; (UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{</p>
+
+<pre><code>NSString *cellIdentifier;
+if (indexPath.row!=[datasource count]-1) {
+    cellIdentifier = @"prototypeCell_TableViewController";
+}
+else{
+    cellIdentifier = @"cell2";
+}
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+
+// Configure the cell
+CellDataModel *cellData = [datasource objectAtIndex:indexPath.row];
+
+if (indexPath.row!=[datasource count]) {
+    UILabel *titleLabel = (UILabel *)[cell viewWithTag:Label_Tag];
+    UIButton *buttonT = (UIButton *)[cell viewWithTag:Button_Tag];
+    UISegmentedControl *segC = (UISegmentedControl *)[cell viewWithTag:SegmengControl_Tag];
+    titleLabel.text = cellData.title;
+    [buttonT setTitle:cellData.buttonTitle forState:UIControlStateNormal];
+    [segC setSelectedSegmentIndex:cellData.selectedIndex];
+}
+else{
+    cell.textLabel.text = cellData.title;
+    cell.detailTextLabel.text = cellData.buttonTitle;
+}
+
+return cell;
+</code></pre>
+
+<p>}</p>
 
 <p>```</p>
 
-<ul>
-<li>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath
-{
-NSString </em>cellIdentifier;
-if (indexPath.row!=[datasource count]-1) {
-   cellIdentifier = @&ldquo;prototypeCell_TableViewController&rdquo;;
-}
-else{
-   cellIdentifier = @&ldquo;cell2&rdquo;;
-}
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];</li>
-</ul>
+<p>然后运行，大概就是这个样子：</p>
 
-
-<p> // Configure the cell
- CellDataModel *cellData = [datasource objectAtIndex:indexPath.row];</p>
-
-<p> if (indexPath.row!=[datasource count]) {
-     UILabel <em>titleLabel = (UILabel </em>)[cell viewWithTag:Label_Tag];
-     UIButton <em>buttonT = (UIButton </em>)[cell viewWithTag:Button_Tag];
-     UISegmentedControl <em>segC = (UISegmentedControl </em>)[cell viewWithTag:SegmengControl_Tag];
-     titleLabel.text = cellData.title;
-     [buttonT setTitle:cellData.buttonTitle forState:UIControlStateNormal];
-     [segC setSelectedSegmentIndex:cellData.selectedIndex];
- }
- else{
-     cell.textLabel.text = cellData.title;
-     cell.detailTextLabel.text = cellData.buttonTitle;
- }</p>
-
-<p> return cell;
-}
-```
-然后运行，大概就是这个样子：</p>
-
-<p>   <img src="/images/2014-07-17-09.png" alt="summary" /></p></li>
-</ol>
-
+<pre><code> ![summary](/images/2014-07-17-09.png)
+</code></pre>
 
 <h4>3. VC3  &ndash; 基于UIViewController的prototype cell</h4>
 
