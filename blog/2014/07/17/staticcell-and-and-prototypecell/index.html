@@ -1,0 +1,291 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>StaticCell &amp;&amp; PrototypeCell - Traximus‘pages</title>
+	<meta name="author" content="traximus">
+
+	
+	<meta name="description" content="StaticCell &amp;&amp; PrototypeCell 这仍然是一篇关于 storyboard的笔记； 在我的项目中TableView使用的还是比较频繁，之前我对于自定义cell，一般都是新建一个xib，或者新建一个customCell类来解决；最近才发现， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Traximus‘pages" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://traximus.github.io/blog/2014/07/17/staticcell-and-and-prototypecell/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='/images/tx.png' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Traximus‘pages</a></h1>
+<p class="subtitle">my little world, Rorschach does existed.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/my_sources">相关资料</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">StaticCell &amp;&amp; PrototypeCell</h1>
+	<div class="entry-content" itemprop="articleBody"><blockquote><h4>这仍然是一篇关于   <code>storyboard</code>的笔记； 在我的项目中<code>TableView</code>使用的还是比较频繁，之前我对于自定义<code>cell</code>，一般都是新建一个<code>xib</code>，或者新建一个<code>customCell</code>类来解决；<!--more-->最近才发现，<code>storyboard</code>里面，可以直接自定义<code>cell</code>，很方便。同时提供两种类型cell， <code>static</code>， <code>prototype</code>; 下面是我关于这两种cell的简单笔记</h4></blockquote>
+
+<hr />
+
+<h2>1. Static Cell</h2>
+
+<h5><code>static cell</code>, 顾名思义，就是静态cell，直接在storyboard中设置好，然后直接加载；无需再设置reuse identifier进行reuse; 当然，你可以在每一个static cell中，按照你的需要，自定义contentView；</h5>
+
+<blockquote><p>PS1: 我这里尝试过给<code>static cell</code>添加<code>reuse identifier</code>,然后进行reuse，结果报错了；</p>
+
+<p>PS2: 我尝试在<code>UIViewController</code>中使用<code>static cell</code>，结果发现，<code>static cell</code>只能在<code>UITableViewController</code>中使用；</p></blockquote>
+
+<h2>2. Prototype Cell</h2>
+
+<h4><code>prototype cell</code>，顾名思义，就是原型cell，这个cell作为一个原型，肯定可以进行reuse，当然也支持在storyboard中直接自定义contentView；</h4>
+
+<blockquote><p>PS： prototype cell在UITableViewController和其他VC中都可以使用，没有static cell的限制；</p></blockquote>
+
+<hr />
+
+<h2>废话少说，我们来个基本的例子，来帮助理解；</h2>
+
+<p><strong>首先，我们的例子app大概是这个样子；</strong>
+<img src="/images/2014-07-17-01.png" alt="summary" /></p>
+
+<p><strong>主要结构很简单，一个基于导航栏的VC，上面3个按钮，分别push到VC1, VC2，VC3</strong></p>
+
+<ul>
+<li>VC1 &ndash; 基于UITableViewController的static cell</li>
+<li>VC2 &ndash; 基于UITableViewController的prototype cell</li>
+<li>VC3 &ndash; 基于UIViewController的prototype cell</li>
+</ul>
+
+
+<h4>1.VC1</h4>
+
+<ol>
+<li><p>我们先添加一个UItableViewController，然后选择static cell</p>
+
+<p><img src="/images/2014-07-17-02.png" alt="summary" /></p></li>
+<li><p>这里可以尝试尽量自定义设置属性； 比如，选中section部分，设置section header, footer， rows</p>
+
+<p><img src="/images/2014-07-17-03.png" alt="summary" /></p></li>
+<li>选择一个cell，进行一些简单的自定义（注意，这里每一个cell是互不影响，你可以单独设置每一个cell的具体属性）
+<img src="/images/2014-07-17-04.png" alt="summary" /></li>
+</ol>
+
+
+<p>好了，VC1基本上就算完成了，你可以直接运行加载，你会发现，和我们预期的一样；</p>
+
+<blockquote><p>PS1：如果我想让这个static cell上面的自定义按钮响应事件，或者支持编辑模式，怎么处理？ 其实这个和以前的处理方式一样：直接在对应的VC.m文件里，写上支持编辑模式的相关方法即可。 至于响应点击时间，我们直接通过IBOutlet关联事件方法就可以了。比如，我这里，对第一行cell的button关联了一个方法 <img src="/images/2014-07-17-05.png" alt="summary" /></p>
+
+<p>PS2: static cell仍然是可以自定义headerView和footerView的</p></blockquote>
+
+<h4>2. VC2</h4>
+
+<ol>
+<li><p>我们先添加一个UItableViewController,然后选择prototype cell</p>
+
+<p><img src="/images/2014-07-17-06.png" alt="summary" /></p></li>
+<li><p>你会发现，你tableView上面cell，显示为prototype cells; 这里cell的数量，可以根据你的实际需要，进行添加或者减少；当然，每一行cell仍然可以完全自定义contentView； （我这里自定义了2个不同的cell，同时，<strong>需要分别设置不同的<code>reuse identifier</code></strong>）</p>
+
+<p> <img src="/images/2014-07-17-07.png" alt="summary" />    <img src="/images/2014-07-17-08.png" alt="summary" /></p></li>
+<li><p>然后，在对应的.m文件中，直接根据cell的reuse identifier即可；</p>
+
+<p>&#8220;`</p>
+
+<ul>
+<li>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath
+{
+NSString </em>cellIdentifier;
+if (indexPath.row!=[datasource count]-1) {
+   cellIdentifier = @&ldquo;prototypeCell_TableViewController&rdquo;;
+}
+else{
+   cellIdentifier = @&ldquo;cell2&rdquo;;
+}
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];</li>
+</ul>
+
+
+<p> // Configure the cell
+ CellDataModel *cellData = [datasource objectAtIndex:indexPath.row];</p>
+
+<p> if (indexPath.row!=[datasource count]) {
+     UILabel <em>titleLabel = (UILabel </em>)[cell viewWithTag:Label_Tag];
+     UIButton <em>buttonT = (UIButton </em>)[cell viewWithTag:Button_Tag];
+     UISegmentedControl <em>segC = (UISegmentedControl </em>)[cell viewWithTag:SegmengControl_Tag];
+     titleLabel.text = cellData.title;
+     [buttonT setTitle:cellData.buttonTitle forState:UIControlStateNormal];
+     [segC setSelectedSegmentIndex:cellData.selectedIndex];
+ }
+ else{
+     cell.textLabel.text = cellData.title;
+     cell.detailTextLabel.text = cellData.buttonTitle;
+ }</p>
+
+<p> return cell;
+}
+&#8220;`
+然后运行，大概就是这个样子：</p>
+
+<p>   <img src="/images/2014-07-17-09.png" alt="summary" /></p></li>
+</ol>
+
+
+<h4>3. VC3</h4>
+
+<ol>
+<li>基本和VC2类似，只是UITableViewController换成了UIViewController；</li>
+<li>注意，这里tableview和navgationBarItem的所处层级不一样，这个注意一下；</li>
+</ol>
+
+
+<hr />
+
+<p>基本笔记就是这些了。以后有了再慢慢更新。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	<a class="addthis_button_sinaweibo"></a>
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - traximus -
+  
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'traximus';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://traximus.github.io/blog/2014/07/17/staticcell-and-and-prototypecell/';
+        var disqus_url = 'http://traximus.github.io/blog/2014/07/17/staticcell-and-and-prototypecell/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47247343-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
