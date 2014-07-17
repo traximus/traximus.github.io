@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Storyboard | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/storyboard/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-07-17T19:06:18+08:00</updated>
+  <updated>2014-07-17T19:14:48+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -40,8 +40,9 @@
 
 <h2>废话少说，我们来个基本的例子，来帮助理解；</h2>
 
-<p><strong>首先，我们的例子app大概是这个样子；</strong>
-<img src="/images/2014-07-17-01.png" alt="summary" /></p>
+<p><strong>首先，我们的例子app大概是这个样子；</strong></p>
+
+<p><img src="/images/2014-07-17-01.png" alt="summary" /></p>
 
 <p><strong>主要结构很简单，一个基于导航栏的VC，上面3个按钮，分别push到VC1, VC2，VC3</strong></p>
 
@@ -52,7 +53,7 @@
 </ul>
 
 
-<h4>1.VC1</h4>
+<h4>1.VC1 &ndash; 基于UITableViewController的static cell</h4>
 
 <ol>
 <li><p>我们先添加一个UItableViewController，然后选择static cell</p>
@@ -68,11 +69,17 @@
 
 <p>好了，VC1基本上就算完成了，你可以直接运行加载，你会发现，和我们预期的一样；</p>
 
-<blockquote><p>PS1：如果我想让这个static cell上面的自定义按钮响应事件，或者支持编辑模式，怎么处理？ 其实这个和以前的处理方式一样：直接在对应的VC.m文件里，写上支持编辑模式的相关方法即可。 至于响应点击时间，我们直接通过IBOutlet关联事件方法就可以了。比如，我这里，对第一行cell的button关联了一个方法 <img src="/images/2014-07-17-05.png" alt="summary" /></p>
+<blockquote><p>PS1：如果我想让这个static cell上面的自定义按钮响应事件，或者支持编辑模式，怎么处理？ 其实这个和以前的处理方式一样：直接在对应的VC.m文件里，写上支持编辑模式的相关方法即可。 至于响应点击时间，我们直接通过IBOutlet关联事件方法就可以了。</p></blockquote>
 
-<p>PS2: static cell仍然是可以自定义headerView和footerView的</p></blockquote>
+<p>比如，我这里，对第一行cell的button关联了一个方法</p>
 
-<h4>2. VC2</h4>
+<p> <img src="/images/2014-07-17-05.png" alt="summary" /></p>
+
+<blockquote><p>PS2: static cell仍然是可以自定义headerView和footerView的</p></blockquote>
+
+<hr />
+
+<h4>2. VC2 &ndash; 基于UITableViewController的prototype cell</h4>
 
 <ol>
 <li><p>我们先添加一个UItableViewController,然后选择prototype cell</p>
@@ -124,7 +131,7 @@ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentif
 </ol>
 
 
-<h4>3. VC3</h4>
+<h4>3. VC3  &ndash; 基于UIViewController的prototype cell</h4>
 
 <ol>
 <li>基本和VC2类似，只是UITableViewController换成了UIViewController；</li>
