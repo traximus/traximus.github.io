@@ -4,7 +4,7 @@ title: "Resource"
 date: 2014-01-17 16:57
 comments: true
 sharing: true
-footer: true
+footer: false
 ---
 ---------------
 
@@ -48,5 +48,8 @@ footer: true
 ##Apple Developer iOS resource
 <https://developer.apple.com/library/ios/navigation/>
 
+
+
+#####你想找到靠谱的人，前提是你也能让别人觉得靠谱. LOL
 --------
 
