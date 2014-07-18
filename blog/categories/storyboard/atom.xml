@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Storyboard | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/storyboard/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-07-17T19:33:36+08:00</updated>
+  <updated>2014-07-18T11:09:26+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -128,7 +128,9 @@ return cell;
 
 <p>```</p>
 
-<p>然后运行，大概就是这个样子：</p>
+<hr />
+
+<h4>然后运行，大概就是这个样子：</h4>
 
 <p><img src="/images/2014-07-17-09.png" alt="summary" /></p>
 
