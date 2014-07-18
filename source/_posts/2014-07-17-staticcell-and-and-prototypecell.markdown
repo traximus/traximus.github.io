@@ -103,8 +103,9 @@ categories: iOS_App  storyboard
 
 ```
 
+----
 
-然后运行，大概就是这个样子：
+####然后运行，大概就是这个样子：
 
 ![summary](/images/2014-07-17-09.png)
 
