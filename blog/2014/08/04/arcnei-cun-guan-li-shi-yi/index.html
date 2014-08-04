@@ -1,0 +1,290 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ARC内存管理拾遗 - Traximus‘pages</title>
+	<meta name="author" content="traximus">
+
+	
+	<meta name="description" content="ARC内存管理拾遗 这是我之前做的一些笔记，今天有空就又看了一下官方ARC的内存管理部分，算是对这部分进行简单的记录； heap &amp;&amp; stack 类别 内存管理 空间大小 碎片 分配方式 效率 heap programmer 大 new和delete产生内存碎片 动态分配 低 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Traximus‘pages" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://traximus.github.io/blog/2014/08/04/arcnei-cun-guan-li-shi-yi/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='/images/tx.png' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Traximus‘pages</a></h1>
+<p class="subtitle">my little world, Rorschach does existed.</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+  <li><a href="/my_sources">相关资料</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265">
+  <style type="text/css">
+  </style>
+</head>
+<body>
+</body>
+</html>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">ARC内存管理拾遗</h1>
+	<div class="entry-content" itemprop="articleBody"><blockquote><p>这是我之前做的一些笔记，今天有空就又看了一下官方<code>ARC</code>的内存管理部分，算是对这部分进行简单的记录；<!--more--></p></blockquote>
+
+<h3>heap &amp;&amp; stack</h3>
+
+<table>
+<thead>
+<tr>
+<th>  类别    </th>
+<th align="center">     内存管理   </th>
+<th align="center">     空间大小   </th>
+<th align="center">           碎片         </th>
+<th align="center">   分配方式     </th>
+<th align="center">    效率   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>heap     </td>
+<td align="center">   programmer  </td>
+<td align="center">      大       </td>
+<td align="center">  new和delete产生内存碎片 </td>
+<td align="center">  动态分配      </td>
+<td align="center">  低</td>
+</tr>
+<tr>
+<td>stack    </td>
+<td align="center">    编译器      </td>
+<td align="center">      小       </td>
+<td align="center">  FIFO，一一对应，无碎片   </td>
+<td align="center">  编译器静态分配 </td>
+<td align="center">  高</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>MRR (manual retain-release)</h3>
+
+<p><a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html#//apple_ref/doc/uid/10000011i">官方文档</a></p>
+
+<h4>1）NSObject部分</h4>
+
+<ul>
+<li>通过<code>malloc</code>， <code>new</code>, <code>copy</code>获取的对象， <code>retainCount</code>+1</li>
+<li>谁拥有，谁管理 （<code>ownership</code>）</li>
+<li>主视图对子视图是强引用<code>strong</code>， 所以子视图只能对主视图弱引用weak，避免retain循环</li>
+<li>应该在恰当的时机，remove <code>notification</code>，设置<code>delegate</code>为nil，即使在ARC下</li>
+<li>集合类<code>NSArray</code>， <code>NSDictionary</code>， <code>NSSet</code>等，对包含的child object会进行管理，无需单独的内存管理；</li>
+</ul>
+
+
+<h4>2）CoreFoundation部分</h4>
+
+<ul>
+<li><code>create</code>, <code>copy</code>会形成own关系，不需要时应该<code>CFRelease((CFTypeRef)obj)</code></li>
+<li><code>get</code>方式得到的object不形成own关系，不需要单独管理</li>
+<li>一个object作为参数，传递到函数中后，receiver不与他形成own关系，也就是，可能在任何时间被<code>deallocate</code>掉，因此，需要<code>CFRetain(obj)</code></li>
+<li><code>CFIndex count = CFGetRetainCount(obj)</code></li>
+<li><code>myCFObj1 = myCFObj2</code> &mdash;>引用拷贝，不会生成2个对象，可以使用<code>CFStringCreateCopy</code>或者类似的方式，生成一个新对象</li>
+<li>CF对象，copy的时候，需要自己实现<code>deep copy</code></li>
+</ul>
+
+
+<hr />
+
+<h3>ARC (Automatic Reference Counting)</h3>
+
+<p><a href="https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226">官方文档</a></p>
+
+<h4>1) 基本要点</h4>
+
+<ul>
+<li>可以根据需要，实现<code>dealloc</code>方法，来实现对<code>resource</code>的管理（比如，设置<code>delegate</code>为nil）</li>
+<li><code>CoreFoundation</code>对象，仍然需要<code>CFRelease</code>，<code>CFRetain</code></li>
+<li><code>assigned</code>的变量，在<code>ARC</code>下是<code>strong</code></li>
+<li>不能使用c struct的指针，而应该创建一个对应的objC对象来管理数据</li>
+<li>不能使用<code>retain</code>， <code>release</code>, <code>retainCount</code>，<code>[super dealloc]</code>,<code>NSAutoreleasePool</code>（使用<code>@autoreleasepool</code>代替）</li>
+<li><p>为了兼容<code>MRR</code>,<code>ARC</code>对method的命名有一个约束：你不应该该一个<code>property</code>命名的时候，以<code>new</code>开头</p>
+
+<p> &#8220;`
+ // Won&rsquo;t work:
+ @property NSString *newTitle;</p>
+
+<p> // Works:
+ @property (getter=theNewTitle) NSString *newTitle;</p>
+
+<p> &#8220;`</p></li>
+</ul>
+
+
+<h4>2）变量修饰符</h4>
+
+<ul>
+<li><code>__strong</code>: is the default. An object remains “alive” as long as there is a strong pointer to it.</li>
+<li><p><code>__weak</code>: A weak reference is set to nil when there are no strong references to the object.</p>
+
+<p> <strong><code>outlets</code>最好申明为<code>weak</code></strong></p></li>
+<li><p><code>__unsafe_unretained</code>: a reference that does not keep the referenced object alive and is not set to nil when there are no strong references to the object &ndash; 简单来说，就是不安全</p></li>
+<li><code>__autoreleasing</code>: is used to denote arguments that are passed by reference (id *) and are autoreleased on return</li>
+</ul>
+
+
+<h4>3） MRR和ARC的转换</h4>
+
+<ul>
+<li><code>__bridge</code>: 直接转换CF对象和objC对象，不修改ownership</li>
+<li><code>__bridge_retained</code> &amp;&amp; <code>CFBridgingRetain</code>: 将objC对象转换为CF对象，并同时修改<code>ownership</code>，之后，需要自己对该对象进行CFRelease()管理</li>
+<li><p><code>__beidge_transfer</code> &amp;&amp; <code>CFBridgingRelease</code>: 将CF对象转换为objC对象，并修改<code>ownership</code>，之后的管理交给<code>ARC</code></p>
+
+<p><strong>id和void *不能直接转换</strong></p></li>
+</ul>
+
+
+<hr />
+
+<h5>基本上就是这么多吧，还有一些知识点没有罗列，只是记录了我自己容易忽略的部分。</h5>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	<a class="addthis_button_sinaweibo"></a>
+	
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - traximus -
+  
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'traximus';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://traximus.github.io/blog/2014/08/04/arcnei-cun-guan-li-shi-yi/';
+        var disqus_url = 'http://traximus.github.io/blog/2014/08/04/arcnei-cun-guan-li-shi-yi/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47247343-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
