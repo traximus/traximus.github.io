@@ -172,8 +172,9 @@
 <li>不能使用<code>retain</code>， <code>release</code>, <code>retainCount</code>，<code>[super dealloc]</code>,<code>NSAutoreleasePool</code>（使用<code>@autoreleasepool</code>代替）</li>
 <li><p>为了兼容<code>MRR</code>,<code>ARC</code>对method的命名有一个约束：你不应该该一个<code>property</code>命名的时候，以<code>new</code>开头</p>
 
-<p> &#8220;`
- // Won&rsquo;t work:
+<p> &#8220;`</p>
+
+<p> // Won&rsquo;t work:
  @property NSString *newTitle;</p>
 
 <p> // Works:
@@ -189,7 +190,7 @@
 <li><code>__strong</code>: is the default. An object remains “alive” as long as there is a strong pointer to it.</li>
 <li><p><code>__weak</code>: A weak reference is set to nil when there are no strong references to the object.</p>
 
-<p> <strong><code>outlets</code>最好申明为<code>weak</code></strong></p></li>
+<p> <strong>注意：<code>outlets</code>最好申明为<code>weak</code></strong></p></li>
 <li><p><code>__unsafe_unretained</code>: a reference that does not keep the referenced object alive and is not set to nil when there are no strong references to the object &ndash; 简单来说，就是不安全</p></li>
 <li><code>__autoreleasing</code>: is used to denote arguments that are passed by reference (id *) and are autoreleased on return</li>
 </ul>
@@ -202,7 +203,7 @@
 <li><code>__bridge_retained</code> &amp;&amp; <code>CFBridgingRetain</code>: 将objC对象转换为CF对象，并同时修改<code>ownership</code>，之后，需要自己对该对象进行CFRelease()管理</li>
 <li><p><code>__beidge_transfer</code> &amp;&amp; <code>CFBridgingRelease</code>: 将CF对象转换为objC对象，并修改<code>ownership</code>，之后的管理交给<code>ARC</code></p>
 
-<p><strong>id和void *不能直接转换</strong></p></li>
+<p><strong>注意：id和void *不能直接转换</strong></p></li>
 </ul>
 
 
