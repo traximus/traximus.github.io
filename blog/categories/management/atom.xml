@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Management | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/management/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-08-05T10:13:17+08:00</updated>
+  <updated>2014-08-05T10:19:52+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -37,17 +37,17 @@
 <tr>
 <td>  heap     </td>
 <td align="center">   programmer  </td>
-<td align="center">        大       </td>
-<td align="center">   new和delete产生内存碎片 </td>
-<td align="center">       动态分配      </td>
+<td align="center">          大       </td>
+<td align="center">     new和delete产生内存碎片 </td>
+<td align="center">           动态分配      </td>
 <td align="center">  低</td>
 </tr>
 <tr>
 <td>  stack    </td>
 <td align="center">    编译器      </td>
-<td align="center">        小       </td>
-<td align="center">   FIFO，一一对应，无碎片   </td>
-<td align="center">       编译器静态分配 </td>
+<td align="center">          小       </td>
+<td align="center">     FIFO，一一对应，无碎片   </td>
+<td align="center">           编译器静态分配 </td>
 <td align="center">  高</td>
 </tr>
 </tbody>
@@ -97,19 +97,18 @@
 <li><code>assigned</code>的变量，在<code>ARC</code>下是<code>strong</code></li>
 <li>不能使用c struct的指针，而应该创建一个对应的objC对象来管理数据</li>
 <li>不能使用<code>retain</code>， <code>release</code>, <code>retainCount</code>，<code>[super dealloc]</code>,<code>NSAutoreleasePool</code>（使用<code>@autoreleasepool</code>代替）</li>
-<li><p>为了兼容<code>MRR</code>,<code>ARC</code>对method的命名有一个约束：你不应该该一个<code>property</code>命名的时候，以<code>new</code>开头</p>
-
-<p> ```</p>
-
-<p> // Won&rsquo;t work:
- @property NSString *newTitle;</p>
-
-<p> // Works:
- @property (getter=theNewTitle) NSString *newTitle;</p>
-
-<p> ```</p></li>
+<li>为了兼容<code>MRR</code>,<code>ARC</code>对method的命名有一个约束：你不应该该一个<code>property</code>命名的时候，以<code>new</code>开头</li>
 </ul>
 
+
+<p>```
+   // Won&rsquo;t work:
+   @property NSString *newTitle;</p>
+
+<p>   // Works:
+   @property (getter=theNewTitle) NSString *newTitle;</p>
+
+<p>```</p>
 
 <h4>2）变量修饰符</h4>
 
