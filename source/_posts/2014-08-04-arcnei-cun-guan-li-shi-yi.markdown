@@ -11,11 +11,13 @@ categories: iOS_App, memory management
 ### heap && stack
 
 
-  类别    |     内存管理   |     空间大小   |           碎片         |   分配方式     |    效率   
+  类别    |     内存管理   |     空间大小   |           碎片         |   分配方式     |      效率   
 ---------|:-------------:|:-------------:|:---------------------:|:-------------:|:-----------:
-heap     |   programmer  |      大       |  new和delete产生内存碎片 |  动态分配      |  低
-stack    |    编译器      |      小       |  FIFO，一一对应，无碎片   |  编译器静态分配 |  高
+  heap     |   programmer  |          大       |     new和delete产生内存碎片 |           动态分配      |  低
+  stack    |    编译器      |          小       |     FIFO，一一对应，无碎片   |           编译器静态分配 |  高
 
+
+----------
 
 ### MRR (manual retain-release)
 
@@ -52,21 +54,21 @@ stack    |    编译器      |      小       |  FIFO，一一对应，无碎片
 * 不能使用`retain`， `release`, `retainCount`，`[super dealloc]`,` NSAutoreleasePool`（使用`@autoreleasepool`代替）
 * 为了兼容`MRR`,`ARC`对method的命名有一个约束：你不应该该一个`property`命名的时候，以`new`开头
 
-   ```
+```
    // Won't work:
    @property NSString *newTitle;
    
    // Works:
    @property (getter=theNewTitle) NSString *newTitle;
-
-   ```
+   
+```
 
 ####2）变量修饰符
 
 * `__strong`: is the default. An object remains “alive” as long as there is a strong pointer to it.
 * `__weak`: A weak reference is set to nil when there are no strong references to the object.
 
-   **`outlets`最好申明为`weak`**
+   **注意：`outlets`最好申明为`weak`**
          
 * `__unsafe_unretained`: a reference that does not keep the referenced object alive and is not set to nil when there are no strong references to the object - 简单来说，就是不安全
 * `__autoreleasing`: is used to denote arguments that are passed by reference (id *) and are autoreleased on return     
@@ -78,7 +80,7 @@ stack    |    编译器      |      小       |  FIFO，一一对应，无碎片
 * `__bridge_retained` && `CFBridgingRetain`: 将objC对象转换为CF对象，并同时修改`ownership`，之后，需要自己对该对象进行CFRelease()管理 
 * `__beidge_transfer` && `CFBridgingRelease`: 将CF对象转换为objC对象，并修改`ownership`，之后的管理交给`ARC`
  
-  **id和void *不能直接转换**
+  **注意：id和void *不能直接转换**
 
 
 
