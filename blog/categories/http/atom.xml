@@ -4,7 +4,7 @@
   <title><![CDATA[Category: HTTP | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/http/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-08-28T14:20:23+08:00</updated>
+  <updated>2014-09-12T11:09:28+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -67,6 +67,22 @@
 .tar        application/tar
 .rar        application/rar
 </code></p>
+
+<h3>如果不清楚文件的MIME-Type，可以用下面的方式获取，打印查看：</h3>
+
+<p>```
+&ndash;(NSString<em>)mimetypeForFile:(NSString</em>)_filepath {</p>
+
+<pre><code>NSURL* fileUrl = [NSURL fileURLWithPath:_filepath];
+NSURLRequest* fileUrlRequest = [NSURLRequest requestWithURL:fileUrl];
+NSError* error = nil;
+NSURLResponse* response = nil;
+[NSURLConnection sendSynchronousRequest:fileUrlRequest returningResponse:&amp;response error:&amp;error];
+return [response MIMEType];
+</code></pre>
+
+<p>}
+```</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-08-28T14:20:23+08:00</updated>
+  <updated>2014-09-12T11:09:28+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -1499,6 +1499,28 @@ memory leaks是非常严重的问题，因为他可能在某个时间导致耗�
 </span><span class='line'>.zip      application/zip
 </span><span class='line'>.tar      application/tar
 </span><span class='line'>.rar      application/rar</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>如果不清楚文件的MIME-Type，可以用下面的方式获取，打印查看：</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-(NSString*)mimetypeForFile:(NSString*)_filepath {
+</span><span class='line'>  NSURL* fileUrl = [NSURL fileURLWithPath:_filepath];
+</span><span class='line'>  NSURLRequest* fileUrlRequest = [NSURLRequest requestWithURL:fileUrl];
+</span><span class='line'>  NSError* error = nil;
+</span><span class='line'>  NSURLResponse* response = nil;
+</span><span class='line'>  [NSURLConnection sendSynchronousRequest:fileUrlRequest returningResponse:&response error:&error];
+</span><span class='line'>  return [response MIMEType];
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
 
 ]]></content>
   </entry>
