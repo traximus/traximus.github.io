@@ -54,3 +54,17 @@ categories: HTTP  MIME XML
 .tar		application/tar
 .rar		application/rar
 ```
+
+
+###如果不清楚文件的MIME-Type，可以用下面的方式获取，打印查看：
+```
+-(NSString*)mimetypeForFile:(NSString*)_filepath {
+	NSURL* fileUrl = [NSURL fileURLWithPath:_filepath];
+	NSURLRequest* fileUrlRequest = [NSURLRequest requestWithURL:fileUrl];
+	NSError* error = nil;
+	NSURLResponse* response = nil;
+	[NSURLConnection sendSynchronousRequest:fileUrlRequest returningResponse:&response error:&error];
+	return [response MIMEType];
+}
+```
+
