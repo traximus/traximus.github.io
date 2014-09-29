@@ -4,7 +4,7 @@
   <title><![CDATA[Traximus‘pages]]></title>
   <link href="http://traximus.github.io/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-09-29T13:51:51+08:00</updated>
+  <updated>2014-09-29T18:47:43+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[QRCode二维码常见格式备忘]]></title>
+    <link href="http://traximus.github.io/blog/2014/09/29/qrcodeer-wei-ma-chang-jian-ge-shi-bei-wang/"/>
+    <updated>2014-09-29T14:06:38+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/09/29/qrcodeer-wei-ma-chang-jian-ge-shi-bei-wang</id>
+    <content type="html"><![CDATA[<p><strong>二维码格式的简单笔记，主要是对QRCode支持的常见约定格式，做一个备忘，万一用得上呢<!--more--></strong></p>
+
+<hr />
+
+<h3>URL</h3>
+
+<ul>
+<li><a href="http://www.test.com">http://www.test.com</a></li>
+<li>URLTO:www.test.com</li>
+</ul>
+
+
+<hr />
+
+<h3>eMail地址</h3>
+
+<ul>
+<li><a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x74;&#101;&#115;&#116;&#64;&#116;&#x65;&#x73;&#x74;&#46;&#99;&#111;&#109;">&#116;&#101;&#x73;&#x74;&#x40;&#x74;&#x65;&#x73;&#116;&#46;&#99;&#x6f;&#x6d;</a></li>
+</ul>
+
+
+<hr />
+
+<h3>电话号码</h3>
+
+<p>*tel:139800xxxxx</p>
+
+<p><strong>注意：如果是座机，加上区号<code>tel:08245834982</code>； 同样，国际通话加+86<code>tel:+86139800xxxxx</code></strong></p>
+
+<hr />
+
+<h3>联系人信息</h3>
+
+<ol>
+<li><p>vCard <a href="http://zh.wikipedia.org/wiki/VCard">具体格式见wiki</a></p>
+
+<p><code>http://blog.csdn.net/sasoritattoo/article/details/17119123</code></p></li>
+<li><p>MECARD</p>
+
+<p><code>MECARD:N:freemouse,King;ADR:maanshan,anhui,china;TEL:+865558888888;EMAIL:freemouse@email.com;URL:t.qq.com/tseeku;QQ:47302929;;</code></p></li>
+<li><p>BIZCARD</p>
+
+<p><code>BIZCARD:N:freemouse;X:King;T:Software Engineer;C:Google;A:maanshan, An Hui, China 243000;B:+8655555555;E:freemouse@email.com;;</code></p></li>
+</ol>
+
+
+<hr />
+
+<h3>短信 SMS</h3>
+
+<ul>
+<li>smsto:139800xxxxx:你好，这里是测试内容</li>
+</ul>
+
+
+<h3>彩信 MMS</h3>
+
+<ul>
+<li>mmsto:139800xxxxx:内容</li>
+</ul>
+
+
+<hr />
+
+<h3>地理位置信息 Geographic information</h3>
+
+<ul>
+<li>geo:40.71872,-73.98095,100</li>
+</ul>
+
+
+<hr />
+
+<h3>GooglePlay市场地址</h3>
+
+<ul>
+<li>market:detail?id=某app的ID</li>
+</ul>
+
+
+<hr />
+
+<h3>WiFi信息</h3>
+
+<ul>
+<li><p>WIFI:T:WPA;S:testssid;P:testpassword;;</p>
+
+<p>  <img src="http://traximus.github.io/images/2014-09-29-01.png" alt=" wifi格式表格" /></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ARC内存管理拾遗]]></title>
