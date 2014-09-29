@@ -33,6 +33,9 @@ footer: false
 <https://github.com>
 
 
+##GitHub资源搜集
+<http://github.ibireme.com/github/list/ios/#>
+
 -------------
 
 ##robots.thoughtbot
