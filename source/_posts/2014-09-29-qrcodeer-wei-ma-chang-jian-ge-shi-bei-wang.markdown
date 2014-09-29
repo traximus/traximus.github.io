@@ -3,7 +3,7 @@ layout: post
 title: "QRCode二维码常见格式备忘"
 date: 2014-09-29 14:06:38 +0800
 comments: true
-categories: 其他
+categories: QRCode, 二维码, 二维码格式
 ---
 
 **二维码格式的简单笔记，主要是对QRCode支持的常见约定格式，做一个备忘，万一用得上呢<!--more-->**
