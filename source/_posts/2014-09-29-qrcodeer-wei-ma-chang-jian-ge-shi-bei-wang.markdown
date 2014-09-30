@@ -11,18 +11,18 @@ categories: QRCode, 二维码, 二维码格式
 --------------
 
 ###URL
-* http://www.test.com
-* URLTO:www.test.com
+* `http://www.test.com`
+* `URLTO:www.test.com`
 
 --------------
 
 ###eMail地址
-* mailto:test@test.com
+* `mailto:test@test.com`
 
 ------------
 
 ###电话号码
-*tel:139800xxxxx
+* `tel:139800xxxxx`
 
 **注意：如果是座机，加上区号```tel:08245834982```； 同样，国际通话加+86```tel:+86139800xxxxx```**
 
@@ -42,25 +42,25 @@ categories: QRCode, 二维码, 二维码格式
 ------------
 
 ###短信 SMS
-* smsto:139800xxxxx:你好，这里是测试内容
+* `smsto:139800xxxxx:你好，这里是测试内容`
 
 ###彩信 MMS
-* mmsto:139800xxxxx:内容
+* `mmsto:139800xxxxx:内容`
 
 -------
 
 ###地理位置信息 Geographic information
-* geo:40.71872,-73.98095,100
+* `geo:40.71872,-73.98095,100`
 
 --------------
 
 ###GooglePlay市场地址
-* market:detail?id=某app的ID
+* `market:detail?id=某app的ID`
 
 ----------------
 
 ###WiFi信息
-* WIFI:T:WPA;S:testssid;P:testpassword;;
+* `WIFI:T:WPA;S:testssid;P:testpassword;;`
 
     ![ wifi格式表格](/images/2014-09-29-01.png)
 
