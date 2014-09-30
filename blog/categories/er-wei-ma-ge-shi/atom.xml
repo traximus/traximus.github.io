@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 二维码格式 | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/er-wei-ma-ge-shi/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-09-29T19:08:43+08:00</updated>
+  <updated>2014-09-30T10:40:06+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -25,8 +25,8 @@
 <h3>URL</h3>
 
 <ul>
-<li><a href="http://www.test.com">http://www.test.com</a></li>
-<li>URLTO:www.test.com</li>
+<li><code>http://www.test.com</code></li>
+<li><code>URLTO:www.test.com</code></li>
 </ul>
 
 
@@ -35,7 +35,7 @@
 <h3>eMail地址</h3>
 
 <ul>
-<li><a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x74;&#x65;&#115;&#x74;&#64;&#116;&#x65;&#115;&#116;&#x2e;&#99;&#111;&#x6d;">&#x74;&#101;&#115;&#116;&#64;&#x74;&#101;&#x73;&#x74;&#x2e;&#99;&#x6f;&#109;</a></li>
+<li><code>mailto:test@test.com</code></li>
 </ul>
 
 
@@ -43,7 +43,10 @@
 
 <h3>电话号码</h3>
 
-<p>*tel:139800xxxxx</p>
+<ul>
+<li><code>tel:139800xxxxx</code></li>
+</ul>
+
 
 <p><strong>注意：如果是座机，加上区号<code>tel:08245834982</code>； 同样，国际通话加+86<code>tel:+86139800xxxxx</code></strong></p>
 
@@ -69,14 +72,14 @@
 <h3>短信 SMS</h3>
 
 <ul>
-<li>smsto:139800xxxxx:你好，这里是测试内容</li>
+<li><code>smsto:139800xxxxx:你好，这里是测试内容</code></li>
 </ul>
 
 
 <h3>彩信 MMS</h3>
 
 <ul>
-<li>mmsto:139800xxxxx:内容</li>
+<li><code>mmsto:139800xxxxx:内容</code></li>
 </ul>
 
 
@@ -85,7 +88,7 @@
 <h3>地理位置信息 Geographic information</h3>
 
 <ul>
-<li>geo:40.71872,-73.98095,100</li>
+<li><code>geo:40.71872,-73.98095,100</code></li>
 </ul>
 
 
@@ -94,7 +97,7 @@
 <h3>GooglePlay市场地址</h3>
 
 <ul>
-<li>market:detail?id=某app的ID</li>
+<li><code>market:detail?id=某app的ID</code></li>
 </ul>
 
 
@@ -103,7 +106,7 @@
 <h3>WiFi信息</h3>
 
 <ul>
-<li><p>WIFI:T:WPA;S:testssid;P:testpassword;;</p>
+<li><p><code>WIFI:T:WPA;S:testssid;P:testpassword;;</code></p>
 
 <p>  <img src="/images/2014-09-29-01.png" alt=" wifi格式表格" /></p></li>
 </ul>
