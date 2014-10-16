@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Json,标准,格式 | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/json-biao-zhun-ge-shi/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-10-16T19:08:34+08:00</updated>
+  <updated>2014-10-16T19:11:59+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -18,7 +18,7 @@
     <link href="http://traximus.github.io/blog/2014/10/16/jsonbi-ji/"/>
     <updated>2014-10-16T15:43:01+08:00</updated>
     <id>http://traximus.github.io/blog/2014/10/16/jsonbi-ji</id>
-    <content type="html"><![CDATA[<blockquote><p><strong>虽然一直使用JSON，却没有认真的研究过JSON标准格式和相关定义；今天既然有空闲时间，就学习一下。并做下笔记。源地址：</strong>&lt;**<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf**">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf**</a>><!--more--></p></blockquote>
+    <content type="html"><![CDATA[<blockquote><p><strong>虽然一直使用JSON，却没有认真的研究过JSON标准格式和相关定义；今天既然有空闲时间，就学习一下。并做下笔记。源地址：</strong><a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf</a><!--more--></p></blockquote>
 
 <h2>概述</h2>
 
