@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Json,标准,格式 | Traximus‘pages]]></title>
   <link href="http://traximus.github.io/blog/categories/json-biao-zhun-ge-shi/atom.xml" rel="self"/>
   <link href="http://traximus.github.io/"/>
-  <updated>2014-10-16T18:57:44+08:00</updated>
+  <updated>2014-10-16T19:08:34+08:00</updated>
   <id>http://traximus.github.io/</id>
   <author>
     <name><![CDATA[traximus]]></name>
@@ -64,17 +64,17 @@
 
 <p>json允许的value有<code>object</code>, <code>array</code>, <code>number</code>, <code>string</code>, <code>true</code>, <code>false</code>, <code>null</code></p>
 
-<ol>
+<ul>
 <li>object &ndash; {key1:value1, key2:value2, key3:value3, &hellip;}</li>
 <li>array  &ndash; [A, B, C,&hellip;]</li>
 <li>string &ndash; 注意控制字符和转义字符，做json转换之前，可能需要处理一下</li>
 <li><p>number &ndash; 5，-3， 123E4, 35e6, 1234E3-2 （其实就是科学计数法）</p>
 
-<p><code>注意：无法表示无限数和NaN[详见](http://baike.baidu.com/view/409924.htm?fr=aladdin)</code></p>
+<p> <code>注意：无法表示无限数和NaN[详见](http://baike.baidu.com/view/409924.htm?fr=aladdin)</code></p>
 
 <blockquote><p>NaN，是Not a Number的缩写。一种计算机用语。NaN 用于处理计算中出现的错误情况，比如 0.0 除以 0.0 或者求负数的平方根。在Matlab中，NaN是一个预定义的常量，表示“不明确的数值结果”。还有Inf表示“无穷大”，pi表示常数π等等。
-```</p></blockquote></li>
-</ol>
+ ```</p></blockquote></li>
+</ul>
 
 
 <hr />
