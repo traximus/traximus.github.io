@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: other - Traximus‘pages</title>
+	<title>JSON笔记 - Traximus‘pages</title>
 	<meta name="author" content="traximus">
 
 	
-	<meta name="description" content="Category: other">
+	<meta name="description" content="JSON笔记 虽然一直使用JSON，却没有认真的研究过JSON标准格式和相关定义；今天既然有空闲时间，就学习一下。并做下笔记。源地址：http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf 概述 JSON &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Traximus‘pages" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://traximus.github.ioblog/categories/other/">
+	<link rel="canonical" href="http://traximus.github.io/blog/2014/10/16/jsonbi-ji/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -90,74 +90,96 @@
 				
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner">
-	
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">JSON笔记</h1>
+	<div class="entry-content" itemprop="articleBody"><blockquote><p>虽然一直使用JSON，却没有认真的研究过JSON标准格式和相关定义；今天既然有空闲时间，就学习一下。并做下笔记。源地址：<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf</a><!--more--></p></blockquote>
+
+<h2>概述</h2>
+
+<p>JSON，以文本格式，在不同语言间进行结构化数据的传递和交换，源自于ECMAScript，但不依赖于任何语言。</p>
+
+<hr />
+
+<h2>JSON文本</h2>
+
+<h5>1）符号</h5>
+
+<ul>
+<li>[ ] 中括号，主要用于表示数组</li>
+<li>{ } 花括号，主要用于表示key/value形式数据</li>
+<li>： 冒号，常见于花括号中，表示key:value数据对</li>
+<li>， 逗号，用于分隔每一个单独的数据对象</li>
+</ul>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2014</h1>
+<h5>2）文字</h5>
 
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2014-03-25T18:38:23+08:00" itemprop="datePublished">Mar 25</time></span>
-		<br>
-		<span class="tags">
+<ul>
+<li>true</li>
+<li>false</li>
+<li>null</li>
+</ul>
 
 
-	<a class='category' href='/blog/categories/other/'>other</a>
+<h5>3）空白字符</h5>
+
+<ul>
+<li>tab制表控制符</li>
+<li>回车</li>
+<li>换行</li>
+<li>空格
+注解：空白字符，可以出现在其他字符之前或者之后，但不允许出现在其他字符之间（字符串除外）；</li>
+</ul>
 
 
-</span>
-	    
-	    <span class="comments"><a href="/blog/2014/03/25/webdavzhu-shou-1-dot-2/#disqus_thread">Comments</a></span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/03/25/webdavzhu-shou-1-dot-2/">WebDAV助手1.2</a></h1>
+<hr />
+
+<h2>JSON值</h2>
+
+<p>json允许的value有<code>object</code>, <code>array</code>, <code>number</code>, <code>string</code>, <code>true</code>, <code>false</code>, <code>null</code></p>
+
+<ol>
+<li>object &ndash; {key1:value1, key2:value2, key3:value3, &hellip;}</li>
+<li>array  &ndash; [A, B, C,&hellip;]</li>
+<li>string &ndash; 注意控制字符和转义字符，做json转换之前，可能需要处理一下</li>
+<li><p>number &ndash; 5，-3， 123E4, 35e6, 1234E3-2 （其实就是科学计数法）</p>
+
+<p><code>注意：无法表示无限数和NaN[详见](http://baike.baidu.com/view/409924.htm?fr=aladdin)</code></p>
+
+<blockquote><p>NaN，是Not a Number的缩写。一种计算机用语。NaN 用于处理计算中出现的错误情况，比如 0.0 除以 0.0 或者求负数的平方根。在Matlab中，NaN是一个预定义的常量，表示“不明确的数值结果”。还有Inf表示“无穷大”，pi表示常数π等等。
+&#8220;`</p></blockquote></li>
+</ol>
+
+
+<hr />
+
+<h5>JSON基本标准和需要注意的地方，就是上面这些了。 对了，还有一点，JSON的各类型值是可以互相嵌套包含的。</h5>
+</div>
+
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
 	
-
-
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2014-01-10T15:43:39+08:00" itemprop="datePublished">Jan 10</time></span>
-		<br>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/other/'>other</a>
-
-
-</span>
-	    
-	    <span class="comments"><a href="/blog/2014/01/10/test-markdown/#disqus_thread">Comments</a></span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/01/10/test-markdown/">Test Markdown</a></h1>
-</article>
-
+	<a class="addthis_button_sinaweibo"></a>
 	
-
-
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2014-01-10T15:09:18+08:00" itemprop="datePublished">Jan 10</time></span>
-		<br>
-		<span class="tags">
-
-
-	<a class='category' href='/blog/categories/other/'>other</a>
-
-
-</span>
-	    
-	    <span class="comments"><a href="/blog/2014/01/10/hello-world/#disqus_thread">Comments</a></span>
-	    
+	
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/01/10/hello-world/">Hello world</a></h1>
-</article>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+</div>
 
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 			</div>
 			<footer id="footer" class="inner"><p>
@@ -180,7 +202,10 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       var disqus_shortname = 'traximus';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://traximus.github.io/blog/2014/10/16/jsonbi-ji/';
+        var disqus_url = 'http://traximus.github.io/blog/2014/10/16/jsonbi-ji/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

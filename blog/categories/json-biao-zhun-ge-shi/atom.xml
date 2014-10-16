@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Json,标准,格式 | Traximus‘pages]]></title>
+  <link href="http://traximus.github.io/blog/categories/json-biao-zhun-ge-shi/atom.xml" rel="self"/>
+  <link href="http://traximus.github.io/"/>
+  <updated>2014-10-16T18:51:20+08:00</updated>
+  <id>http://traximus.github.io/</id>
+  <author>
+    <name><![CDATA[traximus]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JSON笔记]]></title>
+    <link href="http://traximus.github.io/blog/2014/10/16/jsonbi-ji/"/>
+    <updated>2014-10-16T15:43:01+08:00</updated>
+    <id>http://traximus.github.io/blog/2014/10/16/jsonbi-ji</id>
+    <content type="html"><![CDATA[<blockquote><p>虽然一直使用JSON，却没有认真的研究过JSON标准格式和相关定义；今天既然有空闲时间，就学习一下。并做下笔记。源地址：<a href="http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf</a><!--more--></p></blockquote>
+
+<h2>概述</h2>
+
+<p>JSON，以文本格式，在不同语言间进行结构化数据的传递和交换，源自于ECMAScript，但不依赖于任何语言。</p>
+
+<hr />
+
+<h2>JSON文本</h2>
+
+<h5>1）符号</h5>
+
+<ul>
+<li>[ ] 中括号，主要用于表示数组</li>
+<li>{ } 花括号，主要用于表示key/value形式数据</li>
+<li>： 冒号，常见于花括号中，表示key:value数据对</li>
+<li>， 逗号，用于分隔每一个单独的数据对象</li>
+</ul>
+
+
+<h5>2）文字</h5>
+
+<ul>
+<li>true</li>
+<li>false</li>
+<li>null</li>
+</ul>
+
+
+<h5>3）空白字符</h5>
+
+<ul>
+<li>tab制表控制符</li>
+<li>回车</li>
+<li>换行</li>
+<li>空格
+注解：空白字符，可以出现在其他字符之前或者之后，但不允许出现在其他字符之间（字符串除外）；</li>
+</ul>
+
+
+<hr />
+
+<h2>JSON值</h2>
+
+<p>json允许的value有<code>object</code>, <code>array</code>, <code>number</code>, <code>string</code>, <code>true</code>, <code>false</code>, <code>null</code></p>
+
+<ol>
+<li>object &ndash; {key1:value1, key2:value2, key3:value3, &hellip;}</li>
+<li>array  &ndash; [A, B, C,&hellip;]</li>
+<li>string &ndash; 注意控制字符和转义字符，做json转换之前，可能需要处理一下</li>
+<li><p>number &ndash; 5，-3， 123E4, 35e6, 1234E3-2 （其实就是科学计数法）</p>
+
+<p><code>注意：无法表示无限数和NaN[详见](http://baike.baidu.com/view/409924.htm?fr=aladdin)</code></p>
+
+<blockquote><p>NaN，是Not a Number的缩写。一种计算机用语。NaN 用于处理计算中出现的错误情况，比如 0.0 除以 0.0 或者求负数的平方根。在Matlab中，NaN是一个预定义的常量，表示“不明确的数值结果”。还有Inf表示“无穷大”，pi表示常数π等等。
+```</p></blockquote></li>
+</ol>
+
+
+<hr />
+
+<h5>JSON基本标准和需要注意的地方，就是上面这些了。 对了，还有一点，JSON的各类型值是可以互相嵌套包含的。</h5>
+]]></content>
+  </entry>
+  
+</feed>
