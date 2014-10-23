@@ -78,7 +78,7 @@ categories: iOS_App, memory management
 
 * `__bridge`: 直接转换CF对象和objC对象，不修改ownership
 * `__bridge_retained` && `CFBridgingRetain`: 将objC对象转换为CF对象，并同时修改`ownership`，之后，需要自己对该对象进行CFRelease()管理 
-* `__beidge_transfer` && `CFBridgingRelease`: 将CF对象转换为objC对象，并修改`ownership`，之后的管理交给`ARC`
+* `__bridge_transfer` && `CFBridgingRelease`: 将CF对象转换为objC对象，并修改`ownership`，之后的管理交给`ARC`
  
   **注意：id和void *不能直接转换**
 
